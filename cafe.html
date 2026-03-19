@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Café Mora — suryar.studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ECE8E0;
+      --ink: #1C120A;
+      --muted: #9A8070;
+      --rule: #E2D9CE;
+      --warm: #B8926A;
+      --accent: #7C5030;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'Inter', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* CAFE-SPECIFIC TYPOGRAPHY */
+    .hero-content h1 { font-style: italic; letter-spacing: -0.025em; }
+    .brief-content p { font-family: var(--serif); font-size: 20px; font-weight: 400; font-style: italic; line-height: 1.75; color: var(--ink); }
+    .split-text h3 { font-style: italic; }
+    blockquote.pull { font-family: var(--serif); font-style: italic; font-size: clamp(28px,3.5vw,48px); line-height: 1.25; color: var(--accent); max-width: 22ch; margin: 32px 0; }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 60px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-brand {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-brand:hover { color: var(--ink); }
+
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--ink); }
+
+    /* HERO */
+    .project-hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 60px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .hero-content {
+      padding: 80px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid var(--rule);
+    }
+
+    .project-tag {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hero-content h1 {
+      font-family: var(--serif);
+      font-size: clamp(48px, 6vw, 88px);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      margin-top: 40px;
+    }
+
+    .hero-content .sub {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 44ch;
+      line-height: 1.8;
+      margin-top: 24px;
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      border-top: 1px solid var(--rule);
+      padding-top: 32px;
+    }
+
+    .meta-item .label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .meta-item .value {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    .hero-visual {
+      background: #E8E0D0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* SECTIONS */
+    .brief-section {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .brief-label {
+      padding: 64px 48px;
+      border-right: 1px solid var(--rule);
+    }
+
+    .brief-label h2 {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      position: sticky;
+      top: 80px;
+    }
+
+    .brief-content {
+      padding: 64px 48px;
+    }
+
+    .brief-content p {
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--ink);
+      max-width: 56ch;
+    }
+
+    .brief-content p + p {
+      margin-top: 24px;
+    }
+
+    /* WIDE IMAGE */
+    .wide-img {
+      border-bottom: 1px solid var(--rule);
+      overflow: hidden;
+    }
+
+    .wide-img svg, .wide-img .img-fill {
+      width: 100%;
+      display: block;
+    }
+
+    /* SPLIT */
+    .split-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--rule);
+      min-height: 480px;
+    }
+
+    .split-text {
+      padding: 64px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-right: 1px solid var(--rule);
+    }
+
+    .split-text h3 {
+      font-family: var(--serif);
+      font-size: clamp(24px, 3vw, 36px);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-bottom: 20px;
+      margin-top: 8px;
+    }
+
+    .split-text p {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.85;
+      max-width: 40ch;
+    }
+
+    .split-visual {
+      background: #DDD6C8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* OUTCOMES */
+    .outcomes-section {
+      padding: 80px 48px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .outcomes-section h3 {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3vw, 42px);
+      line-height: 1.1;
+      margin-top: 12px;
+      margin-bottom: 56px;
+      max-width: 18ch;
+    }
+
+    .outcomes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--rule);
+    }
+
+    .outcome-item {
+      padding: 40px 40px 40px 0;
+      border-right: 1px solid var(--rule);
+    }
+
+    .outcome-item:last-child { border-right: none; padding-right: 0; }
+    .outcome-item:not(:first-child) { padding-left: 40px; }
+
+    .outcome-item .num {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    .outcome-item h4 {
+      font-family: var(--serif);
+      font-size: 22px;
+      margin-top: 16px;
+      margin-bottom: 10px;
+    }
+
+    .outcome-item p {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* GALLERY */
+    .gallery-section {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      border-bottom: 1px solid var(--rule);
+      min-height: 500px;
+    }
+
+    .gallery-main {
+      background: #E0D8C8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-right: 1px solid var(--rule);
+      overflow: hidden;
+    }
+
+    .gallery-side {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .gallery-side-top {
+      background: #D8D0C0;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--rule);
+      overflow: hidden;
+    }
+
+    .gallery-side-bottom {
+      background: #CCCAB8;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* NEXT PROJECT */
+    .next-project {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--rule);
+      text-decoration: none;
+      color: var(--ink);
+      min-height: 240px;
+      transition: opacity 0.2s;
+    }
+
+    .next-project:hover { opacity: 0.85; }
+
+    .next-left {
+      padding: 64px 48px;
+      border-right: 1px solid var(--rule);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .next-left .label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .next-left h3 {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3vw, 44px);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+
+    .next-left .arrow {
+      font-size: 24px;
+      align-self: flex-end;
+    }
+
+    .next-right {
+      background: #0A0A0A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .next-right img { width:100%; height:100%; object-fit:cover; opacity:0.6; display:block; }
+
+    /* FOOTER */
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 56px;
+    }
+
+    footer a, footer span {
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+    }
+    footer a { font-size: 17px; font-weight: 700; }
+
+    footer a:hover { color: var(--ink); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .project-hero { grid-template-columns: 1fr; }
+      .hero-content { padding: 60px 24px; border-right: none; border-bottom: 1px solid var(--rule); }
+      .hero-visual { min-height: 320px; }
+      .brief-section { grid-template-columns: 1fr; }
+      .brief-label { padding: 32px 24px; border-right: none; }
+      .brief-content { padding: 32px 24px; }
+      .split-section { grid-template-columns: 1fr; }
+      .split-text { border-right: none; border-bottom: 1px solid var(--rule); padding: 48px 24px; }
+      .split-visual { min-height: 280px; }
+      .outcomes-section { padding: 60px 24px; }
+      .outcomes-grid { grid-template-columns: 1fr; }
+      .outcome-item { border-right: none; padding: 32px 0; border-bottom: 1px solid var(--rule); }
+      .outcome-item:not(:first-child) { padding-left: 0; }
+      .gallery-section { grid-template-columns: 1fr; }
+      .gallery-main { min-height: 300px; border-right: none; border-bottom: 1px solid var(--rule); }
+      .gallery-side { flex-direction: row; min-height: 200px; }
+      .gallery-side-top { border-bottom: none; border-right: 1px solid var(--rule); }
+      .next-project { grid-template-columns: 1fr; }
+      .next-left { padding: 48px 24px; border-right: none; border-bottom: 1px solid var(--rule); }
+      .next-right { min-height: 200px; }
+      footer { padding: 0 24px; }
+    }
+    /* ── SITE PREVIEW ── */
+    .preview-section { padding: 80px 48px; border-bottom: 1px solid var(--rule); }
+    .preview-header { margin-bottom: 40px; }
+    .preview-header h3 { font-family: var(--serif); font-size: clamp(24px,2.5vw,36px); line-height: 1.1; letter-spacing: -0.01em; margin-top: 12px; margin-bottom: 8px; }
+    .preview-hint { font-size: 12px; font-weight: 300; color: var(--muted); margin-top: 6px; }
+    .preview-layout { display: grid; grid-template-columns: 3fr 1fr; gap: 28px; align-items: start; }
+    .browser-mockup { border-radius: 10px; overflow: hidden; border: 1px solid var(--rule); box-shadow: 0 8px 40px rgba(0,0,0,0.09); }
+    .browser-bar { background: #EDECEA; padding: 10px 14px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--rule); }
+    .b-dots { display: flex; gap: 5px; }
+    .b-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .b-dot.r { background: #F09090; } .b-dot.y { background: #F0C88A; } .b-dot.g { background: #98CA88; }
+    .b-url-bar { flex: 1; text-align: center; font-size: 11px; color: var(--muted); background: var(--bg); border: 1px solid var(--rule); border-radius: 5px; padding: 4px 12px; letter-spacing: 0.02em; }
+    .browser-scroll { height: 560px; overflow-y: scroll; overflow-x: hidden; scrollbar-width: thin; scrollbar-color: var(--rule) transparent; }
+    .browser-scroll::-webkit-scrollbar { width: 4px; } .browser-scroll::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 2px; }
+    .mobile-col { display: flex; flex-direction: column; gap: 20px; }
+    .phone-mockup { border-radius: 22px; overflow: hidden; border: 1px solid var(--rule); box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
+    .phone-bar { background: #EDECEA; padding: 10px 14px 8px; display: flex; flex-direction: column; align-items: center; gap: 7px; border-bottom: 1px solid var(--rule); }
+    .phone-notch { width: 44px; height: 5px; background: #D4D0C8; border-radius: 3px; }
+    .phone-url { font-size: 9px; color: var(--muted); background: var(--bg); border: 1px solid var(--rule); border-radius: 8px; padding: 2px 10px; width: 100%; text-align: center; letter-spacing: 0.02em; }
+    .phone-scroll { max-height: 260px; overflow-y: scroll; overflow-x: hidden; scrollbar-width: none; }
+    .phone-scroll::-webkit-scrollbar { display: none; }
+    @media (max-width: 900px) { .preview-section { padding: 60px 24px !important; } .preview-layout { grid-template-columns: 1fr !important; } .mobile-col { flex-direction: row; } .phone-scroll { max-height: 180px; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-brand">suryar.studio</a>
+    <a href="index.html" class="nav-back">← All work</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="project-hero">
+    <div class="hero-content">
+      <div>
+        <p class="project-tag">Project 01 / 03</p>
+        <h1>Café Mora</h1>
+        <p class="sub">A neighbourhood café that needed a brand as warm and considered as their single-origin pour-overs. Identity, web, and in-store experience — unified.</p>
+      </div>
+      <div class="hero-meta">
+        <div class="meta-item">
+          <span class="label">Scope</span>
+          <span class="value">Branding, Web Design</span>
+        </div>
+        <div class="meta-item">
+          <span class="label">Year</span>
+          <span class="value">2025</span>
+        </div>
+        <div class="meta-item">
+          <span class="label">Deliverables</span>
+          <span class="value">Identity System, Website, Menu Design</span>
+        </div>
+        <div class="meta-item">
+          <span class="label">Role</span>
+          <span class="value">Design Direction & Execution</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual" style="background:#1A1008;">
+      <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1200&q=85&fit=crop" alt="Coffee crafted slowly" style="width:100%;height:100%;object-fit:cover;opacity:0.9;display:block;" />
+    </div>
+  </div>
+
+  <!-- BRIEF -->
+  <div class="brief-section">
+    <div class="brief-label">
+      <h2>The Brief</h2>
+    </div>
+    <div class="brief-content">
+      <p>Café Mora opened in a converted 1960s pharmacy space in the heart of Banjara Hills. Their coffee programme was exceptional — single-origin beans, meticulous extraction, baristas who knew their craft. But their brand looked like every other café that had discovered Instagram.</p>
+      <p>They needed an identity that felt as considered as the work behind the counter. Something that could live on a paper cup, a menu board, a website, and a ceramic tile wall without ever feeling forced. A brand that aged well.</p>
+      <p>The brief: warm, restrained, rooted. No trendy typefaces. No gradient logos. Something worth returning to.</p>
+    </div>
+  </div>
+
+  <!-- WIDE IMAGE: Café interior -->
+  <div class="wide-img" style="min-height:440px;position:relative;overflow:hidden;">
+    <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1800&q=85&fit=crop" alt="Café Mora interior" style="width:100%;height:440px;object-fit:cover;display:block;" />
+    <div style="position:absolute;bottom:0;left:0;right:0;padding:32px 48px;background:linear-gradient(transparent,rgba(28,18,10,0.65));">
+      <p style="font-family:'DM Serif Display',Georgia,serif;font-style:italic;font-size:clamp(14px,1.2vw,18px);color:#FAF7F2;letter-spacing:0.04em;opacity:0.9;">Single origin · Slow craft · Banjara Hills</p>
+    </div>
+  </div>
+
+  <!-- SPLIT: Identity System -->
+  <div class="split-section">
+    <div class="split-text">
+      <p class="project-tag">Identity System</p>
+      <h3>A palette pulled from the roast.</h3>
+      <p>The colour system draws directly from the coffee process — pale parchment, green bean, light roast, dark espresso. Each shade earns its name. Typography is set in a single serif with weight used sparingly, never for decoration.</p>
+    </div>
+    <div class="split-visual" style="background:#1C120A;">
+      <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=900&q=85&fit=crop" alt="Coffee beans identity" style="width:100%;height:100%;object-fit:cover;opacity:0.85;display:block;" />
+    </div>
+  </div>
+
+  <!-- SPLIT: Web (reversed) -->
+  <div class="split-section" style="direction: rtl;">
+    <div class="split-text" style="direction:ltr;">
+      <p class="project-tag">Web Design</p>
+      <h3>The menu is the experience.</h3>
+      <p>The website is built around the act of choosing — slow, deliberate, without distraction. Each coffee has a tasting note, an origin story, and a preparation method. No upsells. No popups. A digital space as considered as the physical one.</p>
+    </div>
+    <div class="split-visual" style="direction:ltr; background: #1A1208; position:relative; overflow:hidden;">
+      <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=900&q=85&fit=crop" alt="Café Mora web design" style="width:100%;height:100%;object-fit:cover;opacity:0.75;display:block;" />
+      <div style="position:absolute;bottom:40px;left:40px;right:40px;">
+        <p style="font-family:'DM Serif Display',Georgia,serif;font-style:italic;font-size:26px;color:#F5EDD8;line-height:1.3;opacity:0.95;">"A digital space as considered as the physical one."</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- OUTCOMES -->
+  <div class="outcomes-section">
+    <p class="project-tag">Outcomes</p>
+    <h3>What actually changed.</h3>
+    <div class="outcomes-grid">
+      <div class="outcome-item">
+        <p class="num">01</p>
+        <h4>Brand Recognition</h4>
+        <p>A consistent identity across every touchpoint — from the paper bag to the email receipt. Customers began recognising Mora before reading the name.</p>
+      </div>
+      <div class="outcome-item">
+        <p class="num">02</p>
+        <h4>Digital Footfall</h4>
+        <p>The website doubled as a discovery tool. Online reservations increased significantly in the first month after launch, driven purely by organic reach.</p>
+      </div>
+      <div class="outcome-item">
+        <p class="num">03</p>
+        <h4>Brand Confidence</h4>
+        <p>The team stopped apologising for not having a slick brand. The identity gave them the confidence to charge for the quality they were already delivering.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="gallery-section">
+    <div class="gallery-main" style="background:#1C120A;">
+      <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=1200&q=85&fit=crop" alt="Café Mora atmosphere" style="width:100%;height:100%;object-fit:cover;display:block;" />
+    </div>
+    <div class="gallery-side">
+      <div class="gallery-side-top" style="background:#2A1C10;">
+        <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=600&q=85&fit=crop" alt="Latte art" style="width:100%;height:100%;object-fit:cover;display:block;" />
+      </div>
+      <div class="gallery-side-bottom" style="background:#3A2818;">
+        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=85&fit=crop" alt="Coffee cup close-up" style="width:100%;height:100%;object-fit:cover;display:block;" />
+      </div>
+    </div>
+  </div>
+
+  <!-- SITE PREVIEW -->
+  <div class="preview-section">
+    <div class="preview-header">
+      <p class="project-tag">The Website</p>
+      <h3>Scrollable preview</h3>
+      <p class="preview-hint">↕ Scroll inside the frame to explore the full site</p>
+    </div>
+    <div class="preview-layout">
+
+      <!-- Desktop browser — Café Mora: warm parchment, Georgia italic, full-bleed imagery -->
+      <div class="browser-mockup">
+        <div class="browser-bar">
+          <div class="b-dots"><span class="b-dot r"></span><span class="b-dot y"></span><span class="b-dot g"></span></div>
+          <div class="b-url-bar">cafemora.in</div>
+        </div>
+        <div class="browser-scroll">
+          <div style="font-family:'Playfair Display',Georgia,serif;background:#FAF5EE;color:#1C120A;min-height:100%;font-size:15px;line-height:1.6;">
+            <!-- Nav: airy serif brand, muted small-caps links -->
+            <div style="background:rgba(250,245,238,0.96);backdrop-filter:blur(8px);border-bottom:1px solid #E8DDD0;padding:0 36px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;">
+              <span style="font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:18px;color:#3D1F0A;letter-spacing:0.01em;">Café Mora</span>
+              <div style="display:flex;gap:28px;font-family:'Lora',Georgia,serif;">
+                <span style="font-size:10px;color:#9A8070;letter-spacing:0.12em;text-transform:uppercase;">Menu</span>
+                <span style="font-size:10px;color:#9A8070;letter-spacing:0.12em;text-transform:uppercase;">Story</span>
+                <span style="font-size:10px;color:#9A8070;letter-spacing:0.12em;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px;">Visit</span>
+              </div>
+            </div>
+            <!-- Full-bleed hero photo -->
+            <div style="position:relative;height:480px;overflow:hidden;">
+              <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=80&fit=crop" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" />
+              <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(28,18,10,0.05) 40%,rgba(28,18,10,0.55) 100%);"></div>
+              <div style="position:absolute;bottom:40px;left:40px;right:40px;">
+                <p style="font-family:'Lora',Georgia,serif;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(250,245,238,0.6);margin-bottom:14px;">Single origin · Banjara Hills · Est. 2022</p>
+                <h1 style="font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:58px;line-height:1.0;letter-spacing:-0.02em;color:#FAF5EE;margin-bottom:20px;">Coffee,<br/>crafted slowly.</h1>
+                <div style="display:inline-flex;padding:11px 24px;border:1px solid rgba(250,245,238,0.5);font-family:'Lora',Georgia,serif;font-size:11px;letter-spacing:0.08em;color:#FAF5EE;text-transform:uppercase;">View Menu ↗</div>
+              </div>
+            </div>
+            <!-- Warm ticker -->
+            <div style="background:#2A1508;padding:10px 36px;">
+              <p style="font-family:'Lora',Georgia,serif;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:#7A5030;white-space:nowrap;">Open Daily 7am–7pm &nbsp;·&nbsp; Single Origin Beans &nbsp;·&nbsp; Slow Craft &nbsp;·&nbsp; Banjara Hills &nbsp;·&nbsp; No Rush. No Noise.</p>
+            </div>
+            <!-- Menu section with photo row -->
+            <div style="padding:64px 40px;border-bottom:1px solid #E8DDD0;">
+              <p style="font-family:'Lora',Georgia,serif;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:#9A8070;margin-bottom:8px;">Our Menu</p>
+              <h2 style="font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:42px;letter-spacing:-0.02em;color:#1C120A;margin-bottom:16px;">What we make.</h2>
+              <p style="font-family:'Lora',Georgia,serif;font-size:13px;font-weight:300;color:#7A6050;max-width:48ch;line-height:1.8;margin-bottom:40px;">Sourced from farms we've visited. Roasted the week you drink it. Every cup is a considered thing.</p>
+              <!-- Photo strip -->
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:40px;">
+                <div style="aspect-ratio:4/3;overflow:hidden;border-radius:2px;"><img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&q=80&fit=crop" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+                <div style="aspect-ratio:4/3;overflow:hidden;border-radius:2px;"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&q=80&fit=crop" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+                <div style="aspect-ratio:4/3;overflow:hidden;border-radius:2px;"><img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&fit=crop" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+              </div>
+              <!-- Menu list -->
+              <div style="border-top:1px solid #E8DDD0;">
+                <div style="border-bottom:1px solid #E8DDD0;padding:18px 0;display:flex;justify-content:space-between;align-items:baseline;"><div><p style="font-family:'Playfair Display',Georgia,serif;font-size:17px;color:#1C120A;">Pour Over</p><p style="font-family:'Lora',Georgia,serif;font-size:11px;color:#9A8070;margin-top:3px;font-style:italic;">Ethiopia Yirgacheffe · Light · Floral, citrus</p></div><p style="font-family:'Lora',Georgia,serif;font-size:13px;color:#9A8070;">₹280</p></div>
+                <div style="border-bottom:1px solid #E8DDD0;padding:18px 0;display:flex;justify-content:space-between;align-items:baseline;"><div><p style="font-family:'Playfair Display',Georgia,serif;font-size:17px;color:#1C120A;">Flat White</p><p style="font-family:'Lora',Georgia,serif;font-size:11px;color:#9A8070;margin-top:3px;font-style:italic;">Colombia Huila · Medium · Chocolate, walnut</p></div><p style="font-family:'Lora',Georgia,serif;font-size:13px;color:#9A8070;">₹220</p></div>
+                <div style="border-bottom:1px solid #E8DDD0;padding:18px 0;display:flex;justify-content:space-between;align-items:baseline;"><div><p style="font-family:'Playfair Display',Georgia,serif;font-size:17px;color:#1C120A;">Cold Brew</p><p style="font-family:'Lora',Georgia,serif;font-size:11px;color:#9A8070;margin-top:3px;font-style:italic;">Brazil Cerrado · Dark · Smoky, brown sugar</p></div><p style="font-family:'Lora',Georgia,serif;font-size:13px;color:#9A8070;">₹260</p></div>
+                <div style="border-bottom:1px solid #E8DDD0;padding:18px 0;display:flex;justify-content:space-between;align-items:baseline;"><div><p style="font-family:'Playfair Display',Georgia,serif;font-size:17px;color:#1C120A;">Cortado</p><p style="font-family:'Lora',Georgia,serif;font-size:11px;color:#9A8070;margin-top:3px;font-style:italic;">Equal parts espresso &amp; warm milk</p></div><p style="font-family:'Lora',Georgia,serif;font-size:13px;color:#9A8070;">₹200</p></div>
+                <div style="padding:18px 0;display:flex;justify-content:space-between;align-items:baseline;"><div><p style="font-family:'Playfair Display',Georgia,serif;font-size:17px;color:#1C120A;">Almond Croissant</p><p style="font-family:'Lora',Georgia,serif;font-size:11px;color:#9A8070;margin-top:3px;font-style:italic;">Baked in-house · Frangipane, flaked almonds</p></div><p style="font-family:'Lora',Georgia,serif;font-size:13px;color:#9A8070;">₹180</p></div>
+              </div>
+            </div>
+            <!-- Story block with image + quote side by side -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;min-height:380px;border-bottom:1px solid #E8DDD0;">
+              <div style="overflow:hidden;"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&q=80&fit=crop" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+              <div style="padding:56px 44px;background:#F0E8DC;display:flex;flex-direction:column;justify-content:center;">
+                <p style="font-family:'Lora',Georgia,serif;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:#9A8070;margin-bottom:20px;">Our Story</p>
+                <blockquote style="font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:28px;line-height:1.4;color:#1C120A;margin-bottom:24px;">"We don't rush the good stuff."</blockquote>
+                <p style="font-family:'Lora',Georgia,serif;font-size:13px;font-weight:300;color:#7A6050;line-height:1.9;">Café Mora started with one idea — that great coffee deserved the same care as the best food. We source from farmers we know personally. Roast only what we need. Serve it fresh every morning.</p>
+              </div>
+            </div>
+            <!-- Visit -->
+            <div style="padding:56px 40px;border-bottom:1px solid #E8DDD0;">
+              <p style="font-family:'Lora',Georgia,serif;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:#9A8070;margin-bottom:8px;">Find Us</p>
+              <h2 style="font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:38px;letter-spacing:-0.015em;color:#1C120A;margin-bottom:40px;">Come visit.</h2>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;">
+                <div><p style="font-family:'Lora',Georgia,serif;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:#9A8070;margin-bottom:10px;">Hours</p><p style="font-family:'Lora',Georgia,serif;font-size:13px;font-weight:300;color:#1C120A;line-height:2.2;">Mon–Fri: 7am–7pm<br/>Saturday: 8am–6pm<br/>Sunday: 9am–4pm</p></div>
+                <div><p style="font-family:'Lora',Georgia,serif;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:#9A8070;margin-bottom:10px;">Address</p><p style="font-family:'Lora',Georgia,serif;font-size:13px;font-weight:300;color:#1C120A;line-height:2.2;">12 Banjara Hills Road<br/>Hyderabad, 500034</p></div>
+                <div><p style="font-family:'Lora',Georgia,serif;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:#9A8070;margin-bottom:10px;">Contact</p><p style="font-family:'Lora',Georgia,serif;font-size:13px;font-weight:300;color:#1C120A;line-height:2.2;">hello@cafemora.in<br/>Walk-ins welcome</p></div>
+              </div>
+            </div>
+            <!-- Footer -->
+            <div style="padding:14px 40px;display:flex;align-items:center;justify-content:space-between;background:#2A1508;">
+              <span style="font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:14px;color:#C4906A;">Café Mora</span>
+              <div style="display:flex;gap:20px;"><span style="font-family:'Lora',Georgia,serif;font-size:10px;color:#7A5030;letter-spacing:0.06em;">instagram</span><span style="font-family:'Lora',Georgia,serif;font-size:10px;color:#7A5030;letter-spacing:0.06em;">zomato</span></div>
+              <span style="font-family:'Lora',Georgia,serif;font-size:10px;color:#5A3818;">© 2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile column -->
+      <div class="mobile-col">
+        <!-- Phone 1: Homepage with full-bleed photo -->
+        <div class="phone-mockup">
+          <div class="phone-bar"><div class="phone-notch"></div><div class="phone-url">cafemora.in</div></div>
+          <div class="phone-scroll">
+            <div style="font-family:'Playfair Display',Georgia,serif;background:#FAF5EE;color:#1C120A;">
+              <div style="background:rgba(250,245,238,0.95);border-bottom:1px solid #E8DDD0;padding:0 14px;height:38px;display:flex;align-items:center;justify-content:space-between;"><span style="font-style:italic;font-size:14px;color:#3D1F0A;">Café Mora</span><span style="font-size:15px;color:#9A8070;">☰</span></div>
+              <!-- Hero photo -->
+              <div style="position:relative;height:200px;overflow:hidden;">
+                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&q=80&fit=crop" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" />
+                <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,rgba(28,18,10,0.6) 100%);"></div>
+                <div style="position:absolute;bottom:16px;left:16px;">
+                  <h1 style="font-style:italic;font-size:26px;line-height:1.1;color:#FAF5EE;letter-spacing:-0.01em;">Coffee,<br/>crafted slowly.</h1>
+                </div>
+              </div>
+              <div style="padding:20px 14px;">
+                <p style="font-family:'Lora',Georgia,serif;font-size:10px;font-weight:300;color:#7A6050;line-height:1.8;margin-bottom:18px;">Every cup made with intention. Single-origin beans. No shortcuts.</p>
+                <div style="display:inline-flex;padding:8px 16px;border:1px solid #1C120A;font-family:'Lora',Georgia,serif;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;">View Menu ↗</div>
+              </div>
+              <!-- Photo grid -->
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:0 14px 14px;">
+                <div style="aspect-ratio:1;overflow:hidden;border-radius:2px;"><img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=250&q=80&fit=crop" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+                <div style="aspect-ratio:1;overflow:hidden;border-radius:2px;"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=250&q=80&fit=crop" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+              </div>
+              <div style="padding:20px 14px;border-top:1px solid #E8DDD0;">
+                <p style="font-family:'Lora',Georgia,serif;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:#9A8070;margin-bottom:12px;">Menu</p>
+                <div style="border-bottom:1px solid #E8DDD0;padding:10px 0;display:flex;justify-content:space-between;"><div><p style="font-size:13px;color:#1C120A;">Pour Over</p><p style="font-family:'Lora',Georgia,serif;font-size:9px;color:#9A8070;margin-top:2px;font-style:normal;">Ethiopia · Light</p></div><p style="font-family:'Lora',Georgia,serif;font-size:10px;color:#9A8070;">₹280</p></div>
+                <div style="border-bottom:1px solid #E8DDD0;padding:10px 0;display:flex;justify-content:space-between;"><div><p style="font-size:13px;color:#1C120A;">Flat White</p><p style="font-family:'Lora',Georgia,serif;font-size:9px;color:#9A8070;margin-top:2px;font-style:normal;">Colombia · Medium</p></div><p style="font-family:'Lora',Georgia,serif;font-size:10px;color:#9A8070;">₹220</p></div>
+                <div style="padding:10px 0;display:flex;justify-content:space-between;"><div><p style="font-size:13px;color:#1C120A;">Cold Brew</p><p style="font-family:'Lora',Georgia,serif;font-size:9px;color:#9A8070;margin-top:2px;font-style:normal;">Brazil · Dark</p></div><p style="font-family:'Lora',Georgia,serif;font-size:10px;color:#9A8070;">₹260</p></div>
+              </div>
+              <div style="padding:20px 14px;background:#F0E8DC;border-top:1px solid #E8DDD0;">
+                <blockquote style="font-style:italic;font-size:16px;line-height:1.5;color:#1C120A;margin-bottom:10px;">"We don't rush<br/>the good stuff."</blockquote>
+                <p style="font-family:'Lora',Georgia,serif;font-size:10px;font-weight:300;color:#7A6050;">12 Banjara Hills Road, Hyderabad</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Phone 2: Story/About with large photo -->
+        <div class="phone-mockup">
+          <div class="phone-bar"><div class="phone-notch"></div><div class="phone-url">cafemora.in/story</div></div>
+          <div class="phone-scroll">
+            <div style="font-family:'Playfair Display',Georgia,serif;background:#FAF5EE;color:#1C120A;">
+              <div style="background:rgba(250,245,238,0.95);border-bottom:1px solid #E8DDD0;padding:0 14px;height:38px;display:flex;align-items:center;justify-content:space-between;"><span style="font-style:italic;font-size:14px;color:#3D1F0A;">Café Mora</span><span style="font-size:15px;color:#9A8070;">☰</span></div>
+              <div style="height:180px;overflow:hidden;"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400&q=80&fit=crop" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+              <div style="padding:22px 14px;background:#F0E8DC;">
+                <p style="font-family:'Lora',Georgia,serif;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:#9A8070;margin-bottom:12px;">Our Story</p>
+                <blockquote style="font-style:italic;font-size:20px;line-height:1.4;color:#1C120A;margin-bottom:16px;">"We don't rush the good stuff."</blockquote>
+                <p style="font-family:'Lora',Georgia,serif;font-size:10px;font-weight:300;color:#7A6050;line-height:1.85;">Café Mora started with one idea — that great coffee deserved the same care as the best food. We source from farmers we know personally.</p>
+              </div>
+              <div style="height:140px;overflow:hidden;"><img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400&q=80&fit=crop" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+              <div style="padding:18px 14px;border-top:1px solid #E8DDD0;">
+                <p style="font-family:'Lora',Georgia,serif;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:#9A8070;margin-bottom:8px;">Find Us</p>
+                <p style="font-family:'Lora',Georgia,serif;font-size:11px;font-weight:300;color:#1C120A;line-height:2.0;">Mon–Fri 7am–7pm<br/>12 Banjara Hills Road, Hyderabad</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- NEXT PROJECT -->
+  <a href="auto.html" class="next-project">
+    <div class="next-left">
+      <p class="label">Next Project</p>
+      <h3>Iron Clutch</h3>
+      <span class="arrow">→</span>
+    </div>
+    <div class="next-right">
+      <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=900&q=80&fit=crop" alt="Iron Clutch" />
+    </div>
+  </a>
+
+  <footer>
+    <a href="index.html">← suryar.studio</a>
+    <span>© 2025</span>
+  </footer>
+
+</body>
+</html>

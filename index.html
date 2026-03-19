@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>suryar.studio — We design futures.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #E0DDD6;
+      --ink: #1A1A18;
+      --muted: #888880;
+      --rule: #DEDAD3;
+      --accent: #1A1A18;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'Inter', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 60px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-brand {
+      font-family: var(--sans);
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--ink); }
+
+    .nav-links a.active { text-decoration: underline; text-underline-offset: 4px; }
+
+    /* ── SECTIONS ── */
+    section { position: relative; }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .section-num {
+      position: absolute;
+      top: 48px;
+      right: 48px;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── 01 HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px 48px 80px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+
+    .hero-headline {
+      font-family: var(--serif);
+      font-size: clamp(52px, 8vw, 112px);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      max-width: 14ch;
+      margin-bottom: 40px;
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 40ch;
+      margin-bottom: 56px;
+      line-height: 1.7;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border: 1px solid var(--ink);
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      text-decoration: none;
+      background: transparent;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      align-self: flex-start;
+    }
+
+    .cta:hover { background: var(--ink); color: var(--bg); }
+
+    .hero-tags {
+      position: absolute;
+      bottom: 48px;
+      left: 48px;
+      display: flex;
+      gap: 24px;
+    }
+
+    .hero-tags span {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── 02 MARQUEE ── */
+    #marquee {
+      border-bottom: 1px solid var(--rule);
+      overflow: hidden;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      background: var(--bg);
+    }
+
+    .marquee-track {
+      display: flex;
+      white-space: nowrap;
+      animation: marquee 28s linear infinite;
+      gap: 0;
+    }
+
+    .marquee-track span {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0 32px;
+    }
+
+    .marquee-track .dot {
+      color: var(--rule);
+      padding: 0;
+    }
+
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── 03 WORK ── */
+    #work {
+      padding: 80px 48px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .work-header {
+      margin-bottom: 64px;
+    }
+
+    .work-header h2 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-top: 12px;
+    }
+
+    .work-header p {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--muted);
+      margin-top: 12px;
+      max-width: 52ch;
+    }
+
+    .projects-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .project-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--rule);
+      text-decoration: none;
+      color: var(--ink);
+      transition: opacity 0.2s;
+      min-height: 420px;
+    }
+
+    .project-item:last-child { border-bottom: 1px solid var(--rule); }
+
+    .project-item:hover { opacity: 0.88; }
+
+    .project-item:nth-child(even) .project-img { order: 1; }
+    .project-item:nth-child(even) .project-meta { order: 0; }
+
+    .project-img {
+      overflow: hidden;
+      background: var(--rule);
+    }
+
+    .project-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .project-item:hover .project-img img { transform: scale(1.02); }
+
+    /* SVG placeholder fills */
+    .project-img .placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .project-meta {
+      padding: 56px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-index {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .project-title {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3vw, 44px);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-top: 24px;
+    }
+
+    .project-outcome {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--muted);
+      margin-top: 16px;
+      max-width: 36ch;
+      line-height: 1.7;
+    }
+
+    .project-footer {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .project-role {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 5px 12px;
+      border: 1px solid var(--rule);
+    }
+
+    .project-arrow {
+      margin-left: auto;
+      font-size: 18px;
+      color: var(--ink);
+    }
+
+    /* ── 04 CAPABILITIES ── */
+    #capabilities {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .cap-left {
+      padding: 80px 48px;
+      border-right: 1px solid var(--rule);
+    }
+
+    .cap-left h2 {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3vw, 44px);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-top: 12px;
+      max-width: 16ch;
+    }
+
+    .cap-right {
+      padding: 80px 48px;
+    }
+
+    .cap-list {
+      list-style: none;
+      margin-top: 12px;
+    }
+
+    .cap-list li {
+      padding: 22px 0;
+      border-bottom: 1px solid var(--rule);
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--ink);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .cap-list li:first-child { border-top: 1px solid var(--rule); }
+
+    .cap-list li span { color: var(--muted); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; margin-top: 2px; }
+
+    /* ── 05 PROCESS ── */
+    #process {
+      padding: 80px 48px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .process-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 64px;
+    }
+
+    .process-header h2 {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3vw, 44px);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-top: 12px;
+    }
+
+    .process-header p {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 44ch;
+      line-height: 1.8;
+      align-self: end;
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--rule);
+    }
+
+    .process-step {
+      padding: 40px 32px 40px 0;
+      border-right: 1px solid var(--rule);
+    }
+
+    .process-step:last-child { border-right: none; padding-right: 0; }
+    .process-step:not(:first-child) { padding-left: 32px; }
+
+    .step-num {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .step-name {
+      font-family: var(--serif);
+      font-size: 24px;
+      margin-top: 20px;
+      margin-bottom: 12px;
+    }
+
+    .step-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* ── 06 STUDIO ── */
+    #studio {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .studio-left {
+      padding: 80px 48px;
+      border-right: 1px solid var(--rule);
+    }
+
+    .studio-left h2 {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3vw, 44px);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-top: 12px;
+      margin-bottom: 28px;
+    }
+
+    .studio-left p {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.85;
+      max-width: 44ch;
+    }
+
+    .studio-stats {
+      display: flex;
+      gap: 0;
+      margin-top: 56px;
+      border-top: 1px solid var(--rule);
+      padding-top: 32px;
+    }
+
+    .studio-stat {
+      flex: 1;
+    }
+
+    .studio-stat + .studio-stat {
+      padding-left: 32px;
+      border-left: 1px solid var(--rule);
+    }
+
+    .stat-val {
+      font-family: var(--serif);
+      font-size: 36px;
+      line-height: 1;
+      color: var(--ink);
+    }
+
+    .stat-label {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .studio-right {
+      background: var(--rule);
+      min-height: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .studio-right svg {
+      opacity: 0.35;
+    }
+
+    /* ── 08 CONTACT ── */
+    #contact {
+      padding: 120px 48px;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0;
+    }
+
+    .contact-rule {
+      width: 40px;
+      height: 1px;
+      background: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    .contact-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    #contact h2 {
+      font-family: var(--serif);
+      font-size: clamp(40px, 6vw, 80px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      max-width: 14ch;
+      margin-bottom: 24px;
+    }
+
+    #contact p {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--muted);
+      margin-bottom: 48px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 36px;
+      border: 1px solid var(--ink);
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .contact-link:hover { background: var(--ink); color: var(--bg); }
+
+    .contact-link.secondary {
+      border-color: var(--rule);
+      color: var(--muted);
+    }
+
+    .contact-link.secondary:hover { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+
+    /* ── FOOTER ── */
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 56px;
+      border-top: 1px solid var(--rule);
+    }
+
+    .footer-brand {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+    }
+
+    .footer-links a {
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--ink); }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .nav-links { gap: 20px; }
+
+      #hero { padding: 100px 24px 80px; }
+      .hero-tags { left: 24px; bottom: 32px; }
+      .section-num { right: 24px; top: 32px; }
+
+      #work { padding: 60px 24px; }
+      .project-item { grid-template-columns: 1fr; min-height: auto; }
+      .project-item:nth-child(even) .project-img { order: 0; }
+      .project-item:nth-child(even) .project-meta { order: 1; }
+      .project-img { min-height: 260px; }
+      .project-meta { padding: 36px 24px; }
+
+      #capabilities { grid-template-columns: 1fr; }
+      .cap-left { padding: 60px 24px; border-right: none; border-bottom: 1px solid var(--rule); }
+      .cap-right { padding: 60px 24px; }
+
+      #process { padding: 60px 24px; }
+      .process-header { grid-template-columns: 1fr; gap: 16px; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+      .process-step { border-right: none; border-bottom: 1px solid var(--rule); padding: 32px 0; }
+      .process-step:not(:first-child) { padding-left: 0; }
+
+      #studio { grid-template-columns: 1fr; }
+      .studio-left { padding: 60px 24px; border-right: none; }
+      .studio-right { min-height: 280px; }
+
+      #contact { padding: 80px 24px; }
+      footer { padding: 0 24px; flex-wrap: wrap; height: auto; padding-top: 16px; padding-bottom: 16px; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-brand">suryar.studio</a>
+    <ul class="nav-links">
+      <li><a href="#work">work</a></li>
+      <li><a href="#process">process</a></li>
+      <li><a href="#studio">studio</a></li>
+      <li><a href="#contact" class="active">contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- 01 HERO -->
+  <section id="hero">
+    <span class="section-num">01</span>
+    <p class="hero-eyebrow">01 — Hero</p>
+    <h1 class="hero-headline">We design futures.<br/>Not just websites.</h1>
+    <p class="hero-sub">Digital design studio. Minimal by principle.<br/>Precise by craft.</p>
+    <a href="#contact" class="cta">Start a project &nbsp;↗</a>
+    <div class="hero-tags">
+      <span>branding</span>
+      <span>web</span>
+      <span>systems</span>
+      <span>motion</span>
+    </div>
+  </section>
+
+  <!-- 02 MARQUEE -->
+  <section id="marquee" aria-label="Studio ticker">
+    <div class="marquee-track">
+      <!-- First set -->
+      <span>02 — Scroll Marquee</span><span class="dot">·</span>
+      <span>"Design is the silence between the elements."</span><span class="dot">·</span>
+      <span>Available for new projects</span><span class="dot">·</span>
+      <span>2025 →</span><span class="dot">·</span>
+      <span>Minimal by principle</span><span class="dot">·</span>
+      <span>Precise by craft</span><span class="dot">·</span>
+      <span>Branding · Web · Systems · Motion</span><span class="dot">·</span>
+      <!-- Duplicate for seamless loop -->
+      <span>02 — Scroll Marquee</span><span class="dot">·</span>
+      <span>"Design is the silence between the elements."</span><span class="dot">·</span>
+      <span>Available for new projects</span><span class="dot">·</span>
+      <span>2025 →</span><span class="dot">·</span>
+      <span>Minimal by principle</span><span class="dot">·</span>
+      <span>Precise by craft</span><span class="dot">·</span>
+      <span>Branding · Web · Systems · Motion</span><span class="dot">·</span>
+    </div>
+  </section>
+
+  <!-- 03 WORK -->
+  <section id="work">
+    <span class="section-num">03</span>
+    <div class="work-header">
+      <p class="section-label">Selected Work</p>
+      <h2>Projects</h2>
+      <p>A curated set of client and self-initiated work — each with a brief, outcome, and live link.</p>
+    </div>
+    <div class="projects-grid">
+
+      <!-- Project 1: Cafe -->
+      <a href="cafe.html" class="project-item">
+        <div class="project-img">
+          <svg viewBox="0 0 800 520" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="800" height="520" fill="#E8E2D8"/>
+            <rect x="0" y="0" width="800" height="520" fill="url(#grain1)" opacity="0.4"/>
+            <!-- Coffee cup silhouette -->
+            <rect x="300" y="180" width="200" height="180" rx="4" fill="#C4BAA8" opacity="0.5"/>
+            <rect x="280" y="340" width="240" height="12" rx="2" fill="#B5AA96" opacity="0.6"/>
+            <path d="M480 230 Q530 230 530 270 Q530 310 480 310" stroke="#B5AA96" stroke-width="12" fill="none" stroke-linecap="round"/>
+            <rect x="340" y="140" width="120" height="40" rx="20" fill="#C4BAA8" opacity="0.4"/>
+            <!-- Steam lines -->
+            <path d="M360 120 Q355 100 360 80" stroke="#C4BAA8" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/>
+            <path d="M400 115 Q395 92 400 72" stroke="#C4BAA8" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/>
+            <path d="M440 120 Q435 100 440 80" stroke="#C4BAA8" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5"/>
+            <!-- Text -->
+            <text x="400" y="420" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#8C8070" letter-spacing="4" opacity="0.7">CAFÉ MORA</text>
+            <defs><filter id="grain1"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter></defs>
+          </svg>
+        </div>
+        <div class="project-meta">
+          <div>
+            <p class="project-index">01 / 03</p>
+            <h3 class="project-title">Café Mora</h3>
+            <p class="project-outcome">A neighbourhood café that needed a brand as warm and considered as their single-origin pour-overs. Identity, web, and in-store experience — unified.</p>
+          </div>
+          <div class="project-footer">
+            <span class="project-role">Branding</span>
+            <span class="project-role">Web</span>
+            <span class="project-arrow">→</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Project 2: Auto -->
+      <a href="auto.html" class="project-item">
+        <div class="project-img">
+          <svg viewBox="0 0 800 520" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="800" height="520" fill="#1E1E1C"/>
+            <!-- Car silhouette -->
+            <path d="M140 300 L200 240 L300 215 L500 215 L600 240 L660 300 L660 340 L140 340 Z" fill="#2E2E2C"/>
+            <path d="M210 240 L270 200 L380 190 L480 192 L560 215" stroke="#3A3A38" stroke-width="2" fill="none"/>
+            <!-- Wheels -->
+            <circle cx="240" cy="340" r="50" fill="#181816"/>
+            <circle cx="240" cy="340" r="34" fill="#232321"/>
+            <circle cx="240" cy="340" r="16" fill="#181816"/>
+            <circle cx="560" cy="340" r="50" fill="#181816"/>
+            <circle cx="560" cy="340" r="34" fill="#232321"/>
+            <circle cx="560" cy="340" r="16" fill="#181816"/>
+            <!-- Windscreen -->
+            <path d="M290 235 L330 200 L450 200 L490 235 Z" fill="#2A2A28" opacity="0.8"/>
+            <!-- Headlight -->
+            <ellipse cx="640" cy="285" rx="18" ry="10" fill="#8C8070" opacity="0.5"/>
+            <!-- Text -->
+            <text x="400" y="430" text-anchor="middle" font-family="Georgia, serif" font-size="11" fill="#5A5A56" letter-spacing="6" opacity="0.7">IRON CLUTCH</text>
+            <text x="400" y="450" text-anchor="middle" font-family="Georgia, serif" font-size="8" fill="#3A3A38" letter-spacing="4" opacity="0.6">AUTOMOBILE SHOP</text>
+          </svg>
+        </div>
+        <div class="project-meta">
+          <div>
+            <p class="project-index">02 / 03</p>
+            <h3 class="project-title">Iron Clutch</h3>
+            <p class="project-outcome">An automobile enthusiast shop with a cult following. Replatformed their digital presence to match the precision and obsession of the community they serve.</p>
+          </div>
+          <div class="project-footer">
+            <span class="project-role">Web</span>
+            <span class="project-role">Systems</span>
+            <span class="project-arrow">→</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Project 3: Museum -->
+      <a href="museum.html" class="project-item">
+        <div class="project-img">
+          <svg viewBox="0 0 800 520" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="800" height="520" fill="#F0EDE6"/>
+            <!-- Museum facade -->
+            <!-- Pediment -->
+            <polygon points="400,140 180,260 620,260" fill="#D8D3C8"/>
+            <!-- Columns -->
+            <rect x="215" y="260" width="30" height="160" fill="#CCCABE"/>
+            <rect x="275" y="260" width="30" height="160" fill="#D2CFCA"/>
+            <rect x="335" y="260" width="30" height="160" fill="#CCCABE"/>
+            <rect x="455" y="260" width="30" height="160" fill="#D2CFCA"/>
+            <rect x="515" y="260" width="30" height="160" fill="#CCCABE"/>
+            <rect x="575" y="260" width="30" height="160" fill="#D2CFCA"/>
+            <!-- Base -->
+            <rect x="170" y="418" width="460" height="16" fill="#C4C0B8"/>
+            <!-- Steps -->
+            <rect x="155" y="434" width="490" height="10" fill="#BEBAB2"/>
+            <rect x="140" y="444" width="520" height="10" fill="#B8B4AC"/>
+            <!-- Door -->
+            <rect x="365" y="330" width="70" height="90" fill="#C0BBB0"/>
+            <!-- Small window in pediment -->
+            <circle cx="400" cy="195" r="18" fill="#D0CBC0" opacity="0.6"/>
+            <!-- Text -->
+            <text x="400" y="490" text-anchor="middle" font-family="Georgia, serif" font-size="10" fill="#8C8880" letter-spacing="5" opacity="0.8">PALOMA MUSEUM</text>
+          </svg>
+        </div>
+        <div class="project-meta">
+          <div>
+            <p class="project-index">03 / 03</p>
+            <h3 class="project-title">Paloma Museum</h3>
+            <p class="project-outcome">A contemporary museum needing a digital home that honours the work inside it. Navigation as exhibition. Silence between the elements, made structural.</p>
+          </div>
+          <div class="project-footer">
+            <span class="project-role">Web</span>
+            <span class="project-role">Motion</span>
+            <span class="project-arrow">→</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- 04 CAPABILITIES -->
+  <section id="capabilities">
+    <div class="cap-left">
+      <span class="section-num" style="position:static; display:block; margin-bottom: 40px;">04</span>
+      <p class="section-label">Capabilities</p>
+      <h2>What we do</h2>
+    </div>
+    <div class="cap-right">
+      <p class="section-label" style="margin-bottom:4px;">Services, not a menu — described as outcomes the client actually gets.</p>
+      <ul class="cap-list">
+        <li>Your brand feels inevitable — like it could never have been anything else. <span>Brand Identity</span></li>
+        <li>Your website converts without ever feeling like it's trying. <span>Web Design</span></li>
+        <li>Your design system scales without breaking. <span>Design Systems</span></li>
+        <li>Your story moves — literally. Motion that earns attention. <span>Motion & Animation</span></li>
+        <li>Your strategy is a position, not a paragraph. <span>Brand Strategy</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 05 PROCESS -->
+  <section id="process">
+    <span class="section-num">05</span>
+    <div class="process-header">
+      <div>
+        <p class="section-label">Process</p>
+        <h2>How we work</h2>
+      </div>
+      <p>A numbered, step-by-step breakdown — discovery, direction, design, delivery. Feels like a manifesto, not a pitch deck.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step">
+        <p class="step-num">01</p>
+        <h3 class="step-name">Discover</h3>
+        <p class="step-desc">We learn the business before we touch the brand — context first, aesthetics second.</p>
+      </div>
+      <div class="process-step">
+        <p class="step-num">02</p>
+        <h3 class="step-name">Direct</h3>
+        <p class="step-desc">A clear creative direction, agreed before a single pixel is placed.</p>
+      </div>
+      <div class="process-step">
+        <p class="step-num">03</p>
+        <h3 class="step-name">Design</h3>
+        <p class="step-desc">Precise, considered craft — every choice intentional, every element earning its place.</p>
+      </div>
+      <div class="process-step">
+        <p class="step-num">04</p>
+        <h3 class="step-name">Deliver</h3>
+        <p class="step-desc">Shipped, documented, and handed over — built to last beyond the launch.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 STUDIO -->
+  <section id="studio">
+    <div class="studio-left">
+      <span class="section-num" style="position:static; display:block; margin-bottom: 40px;">06</span>
+      <p class="section-label">Studio</p>
+      <h2>About suryar.studio</h2>
+      <p>One studio. Tight collaborations. Built on the belief that restraint is the most radical design choice you can make. We work with founders, brands, and institutions who understand that what you leave out matters as much as what you put in.</p>
+      <div class="studio-stats">
+        <div class="studio-stat">
+          <p class="stat-val">New</p>
+          <p class="stat-label">Focused studio</p>
+        </div>
+        <div class="studio-stat">
+          <p class="stat-val">→</p>
+          <p class="stat-label">Open to projects</p>
+        </div>
+        <div class="studio-stat">
+          <p class="stat-val">∞</p>
+          <p class="stat-label">Precision by craft</p>
+        </div>
+      </div>
+    </div>
+    <div class="studio-right">
+      <svg width="220" height="220" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="20" width="80" height="80" stroke="#8C8880" stroke-width="1"/>
+        <rect x="120" y="20" width="80" height="80" stroke="#8C8880" stroke-width="1"/>
+        <rect x="20" y="120" width="80" height="80" stroke="#8C8880" stroke-width="1"/>
+        <rect x="120" y="120" width="80" height="80" stroke="#8C8880" stroke-width="1"/>
+        <circle cx="110" cy="110" r="36" stroke="#8C8880" stroke-width="1"/>
+        <line x1="20" y1="110" x2="200" y2="110" stroke="#8C8880" stroke-width="0.5" opacity="0.5"/>
+        <line x1="110" y1="20" x2="110" y2="200" stroke="#8C8880" stroke-width="0.5" opacity="0.5"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 08 CONTACT -->
+  <section id="contact">
+    <span class="section-num">08</span>
+    <div class="contact-rule"></div>
+    <p class="contact-eyebrow">Contact</p>
+    <h2>Let's build something worth noticing.</h2>
+    <p>Open to new projects, collabs, and conversations.</p>
+    <div class="contact-links">
+      <a href="mailto:suryavritesh@gmail.com" class="contact-link">suryavritesh@gmail.com</a>
+      <a href="tel:+918977502772" class="contact-link secondary">+91 8977502772</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-brand">suryar.studio</span>
+    <div class="footer-links">
+      <a href="#">twitter</a>
+      <a href="#">instagram</a>
+      <a href="#">dribbble</a>
+      <a href="#">read.cv</a>
+    </div>
+    <span class="footer-copy">© 2025</span>
+  </footer>
+
+</body>
+</html>

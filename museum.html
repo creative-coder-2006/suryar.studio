@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paloma Museum — suryar.studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F0EEEC;
+      --ink: #1A1A1A;
+      --muted: #9A9A9A;
+      --rule: #EBEBEB;
+      --stone: #CCCCCC;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'Inter', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* MUSEUM — institutional minimalism */
+    .project-tag { letter-spacing: 0.16em !important; font-weight: 400; }
+    .brief-content p { font-size: 17px; line-height: 2; color: #3A3A3A; }
+    .philosophy-strip { background: #F7F7F7 !important; }
+    .philosophy-strip blockquote { color: #1A1A1A; }
+    .split-text h3 { font-weight: 400; }
+    .feature-item p, .outcome-item p { color: #7A7A7A !important; }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 60px;
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-brand { font-size: 17px; font-weight: 700; color: var(--muted); text-decoration: none; transition: color 0.2s; letter-spacing: 0.04em; }
+    .nav-brand:hover { color: var(--ink); }
+    .nav-back { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: var(--ink); }
+
+    /* HERO — full-height with columns */
+    .project-hero {
+      min-height: 100vh;
+      padding-top: 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .hero-content {
+      padding: 80px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid var(--rule);
+    }
+
+    .project-tag { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+
+    .hero-content h1 {
+      font-family: var(--serif);
+      font-size: clamp(48px, 6vw, 88px);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      margin-top: 40px;
+    }
+
+    .hero-content .sub {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 44ch;
+      line-height: 1.8;
+      margin-top: 24px;
+    }
+
+    .hero-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; border-top: 1px solid var(--rule); padding-top: 32px; }
+    .meta-item .label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 6px; }
+    .meta-item .value { font-size: 14px; font-weight: 400; color: var(--ink); }
+
+    .hero-visual { background: #F0F0F0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .hero-visual img { width:100%; height:100%; object-fit:cover; display:block; }
+
+    /* BRIEF */
+    .brief-section { display: grid; grid-template-columns: 1fr 2fr; border-bottom: 1px solid var(--rule); }
+    .brief-label { padding: 64px 48px; border-right: 1px solid var(--rule); }
+    .brief-label h2 { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); position: sticky; top: 80px; }
+    .brief-content { padding: 64px 48px; }
+    .brief-content p { font-size: 18px; font-weight: 300; line-height: 1.85; color: var(--ink); max-width: 56ch; }
+    .brief-content p + p { margin-top: 24px; }
+
+    /* DESIGN PHILOSOPHY STRIP */
+    .philosophy-strip {
+      padding: 80px 48px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .philosophy-strip blockquote {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(24px, 3vw, 40px);
+      line-height: 1.35;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      max-width: 28ch;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .philosophy-strip cite {
+      display: block;
+      text-align: center;
+      font-style: normal;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 32px;
+    }
+
+    /* SPLIT */
+    .split-section { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--rule); min-height: 480px; }
+    .split-text { padding: 64px 48px; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid var(--rule); }
+    .split-text .section-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+    .split-text h3 { font-family: var(--serif); font-size: clamp(24px, 3vw, 36px); line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 20px; margin-top: 8px; }
+    .split-text p { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.85; max-width: 40ch; }
+    .split-visual { display: flex; align-items: center; justify-content: center; overflow: hidden; }
+
+    /* THREE COLUMN FEATURE */
+    .feature-section { padding: 80px 48px; border-bottom: 1px solid var(--rule); }
+    .feature-section h3 { font-family: var(--serif); font-size: clamp(28px, 3vw, 42px); line-height: 1.1; margin-top: 12px; margin-bottom: 56px; max-width: 20ch; letter-spacing: -0.01em; }
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--rule); }
+    .feature-item { padding: 40px 40px 40px 0; border-right: 1px solid var(--rule); }
+    .feature-item:last-child { border-right: none; padding-right: 0; }
+    .feature-item:not(:first-child) { padding-left: 40px; }
+    .feature-item .f-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .feature-item p { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.8; margin-top: 16px; }
+
+    /* OUTCOMES */
+    .outcomes-section { padding: 80px 48px; border-bottom: 1px solid var(--rule); }
+    .outcomes-section h3 { font-family: var(--serif); font-size: clamp(28px, 3vw, 42px); line-height: 1.1; margin-top: 12px; margin-bottom: 56px; max-width: 18ch; }
+    .outcomes-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--rule); }
+    .outcome-item { padding: 40px 40px 40px 0; border-right: 1px solid var(--rule); }
+    .outcome-item:last-child { border-right: none; padding-right: 0; }
+    .outcome-item:not(:first-child) { padding-left: 40px; }
+    .outcome-item .num { font-size: 11px; letter-spacing: 0.1em; color: var(--muted); }
+    .outcome-item h4 { font-family: var(--serif); font-size: 22px; margin-top: 16px; margin-bottom: 10px; }
+    .outcome-item p { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.75; }
+
+    /* GALLERY */
+    .gallery-section { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--rule); min-height: 560px; }
+    .gallery-main { background: #E8E8E8; display: flex; align-items: center; justify-content: center; border-right: 1px solid var(--rule); overflow: hidden; }
+    .gallery-side { display: flex; flex-direction: column; }
+    .gallery-side-top { background: #F2F2F2; flex: 1; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--rule); overflow: hidden; }
+    .gallery-side-bottom { background: #111111; flex: 1; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .gallery-main img, .gallery-side-top img, .gallery-side-bottom img { width:100%; height:100%; object-fit:cover; display:block; }
+
+    /* NEXT / BACK TO INDEX */
+    .next-project { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink); min-height: 240px; transition: opacity 0.2s; }
+    .next-project:hover { opacity: 0.85; }
+    .next-left { padding: 64px 48px; border-right: 1px solid var(--rule); display: flex; flex-direction: column; justify-content: space-between; background: #FFFFFF; }
+    .next-left .label { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+    .next-left h3 { font-family: var(--serif); font-size: clamp(28px, 3vw, 44px); line-height: 1.1; letter-spacing: -0.01em; color: var(--ink); }
+    .next-left .arrow { font-size: 24px; align-self: flex-end; color: var(--muted); }
+    .next-right { background: #F5F0E8; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+    .next-right img { width:100%; height:100%; object-fit:cover; display:block; opacity:0.75; }
+
+    footer { display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 56px; }
+    footer a, footer span { font-size: 12px; color: var(--muted); text-decoration: none; }
+    footer a { font-size: 17px; font-weight: 700; }
+    footer a:hover { color: var(--ink); }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .project-hero { grid-template-columns: 1fr; }
+      .hero-content { padding: 60px 24px; border-right: none; border-bottom: 1px solid var(--rule); }
+      .hero-visual { min-height: 320px; }
+      .brief-section { grid-template-columns: 1fr; }
+      .brief-label { padding: 32px 24px; border-right: none; }
+      .brief-content { padding: 32px 24px; }
+      .philosophy-strip { padding: 60px 24px; }
+      .split-section { grid-template-columns: 1fr; }
+      .split-text { border-right: none; border-bottom: 1px solid var(--rule); padding: 48px 24px; }
+      .split-visual { min-height: 280px; }
+      .feature-section { padding: 60px 24px; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .feature-item { border-right: none; border-bottom: 1px solid var(--rule); padding: 32px 0; }
+      .feature-item:not(:first-child) { padding-left: 0; }
+      .outcomes-section { padding: 60px 24px; }
+      .outcomes-grid { grid-template-columns: 1fr; }
+      .outcome-item { border-right: none; padding: 32px 0; border-bottom: 1px solid var(--rule); }
+      .outcome-item:not(:first-child) { padding-left: 0; }
+      .gallery-section { grid-template-columns: 1fr; }
+      .gallery-main { min-height: 300px; border-right: none; border-bottom: 1px solid var(--rule); }
+      .gallery-side { flex-direction: row; min-height: 200px; }
+      .gallery-side-top { border-bottom: none; border-right: 1px solid var(--rule); }
+      .next-project { grid-template-columns: 1fr; }
+      .next-left { padding: 48px 24px; border-right: none; border-bottom: 1px solid var(--rule); }
+      .next-right { min-height: 200px; }
+      footer { padding: 0 24px; }
+    }
+    /* ── SITE PREVIEW ── */
+    .preview-section { padding: 80px 48px; border-bottom: 1px solid var(--rule); }
+    .preview-header { margin-bottom: 40px; }
+    .preview-header h3 { font-family: var(--serif); font-size: clamp(24px,2.5vw,36px); line-height: 1.1; letter-spacing: -0.01em; margin-top: 12px; margin-bottom: 8px; }
+    .preview-hint { font-size: 12px; font-weight: 300; color: var(--muted); margin-top: 6px; }
+    .preview-layout { display: grid; grid-template-columns: 3fr 1fr; gap: 28px; align-items: start; }
+    .browser-mockup { border-radius: 10px; overflow: hidden; border: 1px solid var(--rule); box-shadow: 0 8px 40px rgba(0,0,0,0.09); }
+    .browser-bar { background: #EDECEA; padding: 10px 14px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--rule); }
+    .b-dots { display: flex; gap: 5px; }
+    .b-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .b-dot.r { background: #F09090; } .b-dot.y { background: #F0C88A; } .b-dot.g { background: #98CA88; }
+    .b-url-bar { flex: 1; text-align: center; font-size: 11px; color: var(--muted); background: var(--bg); border: 1px solid var(--rule); border-radius: 5px; padding: 4px 12px; letter-spacing: 0.02em; }
+    .browser-scroll { height: 560px; overflow-y: scroll; overflow-x: hidden; scrollbar-width: thin; scrollbar-color: var(--rule) transparent; }
+    .browser-scroll::-webkit-scrollbar { width: 4px; } .browser-scroll::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 2px; }
+    .mobile-col { display: flex; flex-direction: column; gap: 20px; }
+    .phone-mockup { border-radius: 22px; overflow: hidden; border: 1px solid var(--rule); box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
+    .phone-bar { background: #EDECEA; padding: 10px 14px 8px; display: flex; flex-direction: column; align-items: center; gap: 7px; border-bottom: 1px solid var(--rule); }
+    .phone-notch { width: 44px; height: 5px; background: #D4D0C8; border-radius: 3px; }
+    .phone-url { font-size: 9px; color: var(--muted); background: var(--bg); border: 1px solid var(--rule); border-radius: 8px; padding: 2px 10px; width: 100%; text-align: center; letter-spacing: 0.02em; }
+    .phone-scroll { max-height: 260px; overflow-y: scroll; overflow-x: hidden; scrollbar-width: none; }
+    .phone-scroll::-webkit-scrollbar { display: none; }
+    @media (max-width: 900px) { .preview-section { padding: 60px 24px !important; } .preview-layout { grid-template-columns: 1fr !important; } .mobile-col { flex-direction: row; } .phone-scroll { max-height: 180px; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-brand">suryar.studio</a>
+    <a href="index.html" class="nav-back">← All work</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="project-hero">
+    <div class="hero-content">
+      <div>
+        <p class="project-tag">Project 03 / 03</p>
+        <h1>Paloma Museum</h1>
+        <p class="sub">A contemporary museum needing a digital home that honours the work inside it. Navigation as exhibition. Silence between the elements, made structural.</p>
+      </div>
+      <div class="hero-meta">
+        <div class="meta-item"><span class="label">Scope</span><span class="value">Web Design, Motion</span></div>
+        <div class="meta-item"><span class="label">Year</span><span class="value">2025</span></div>
+        <div class="meta-item"><span class="label">Deliverables</span><span class="value">Website, Digital Exhibition System, Wayfinding</span></div>
+        <div class="meta-item"><span class="label">Role</span><span class="value">Design Direction & Execution</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img src="https://images.unsplash.com/photo-1577720643272-265f09367456?w=1400&q=85&fit=crop" alt="Paloma Museum gallery interior" />
+    </div>
+  </div>
+
+  <!-- BRIEF -->
+  <div class="brief-section">
+    <div class="brief-label"><h2>The Brief</h2></div>
+    <div class="brief-content">
+      <p>Paloma Museum had recently undergone a curatorial rebrand. The galleries were thoughtful, the collection diverse, the programming ambitious. But their website was a calendar with a logo on it — functional in the narrowest sense, but entirely absent of the experience it should be previewing.</p>
+      <p>Visitors arrived underprepared. The works inside were challenging, contextual, layered — but the site gave you nothing to hold on to before you arrived. The physical wayfinding was considered; the digital wayfinding was an afterthought.</p>
+      <p>The brief: design a website that earns the work it represents. Navigation as exhibition. Space between elements — active, not accidental. Something that tells you what kind of institution this is before you read a single word.</p>
+    </div>
+  </div>
+
+  <!-- PHILOSOPHY STRIP -->
+  <div class="philosophy-strip">
+    <blockquote>"Design is the silence between the elements."</blockquote>
+    <cite>— Design principle applied throughout this project</cite>
+  </div>
+
+  <!-- SPLIT: Navigation as Exhibition -->
+  <div class="split-section">
+    <div class="split-text">
+      <p class="section-label">Digital Exhibition</p>
+      <h3>Every page is a room.</h3>
+      <p>The site architecture mirrors the physical museum — you enter through a lobby, move between galleries, and each collection has its own atmosphere. Typography, spacing, and image treatment shift subtly as you move between wings. You feel the transition before you read the label.</p>
+    </div>
+    <div class="split-visual" style="background:#111; overflow:hidden; position:relative;">
+      <img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=900&q=85&fit=crop" alt="Digital exhibition system" style="width:100%;height:100%;object-fit:cover;opacity:0.8;display:block;" />
+    </div>
+  </div>
+
+  <!-- SPLIT: Wayfinding (reversed) -->
+  <div class="split-section" style="direction:rtl;">
+    <div class="split-text" style="direction:ltr;">
+      <p class="section-label">Digital Wayfinding</p>
+      <h3>Arrive knowing what to see.</h3>
+      <p>Before they walk through the door, visitors now have access to timed audio guides, exhibition floor plans, and contextual notes for each work. The digital space prepares them — and extends the experience after they leave.</p>
+    </div>
+    <div class="split-visual" style="direction:ltr; background:#F5F5F5; overflow:hidden;">
+      <img src="https://images.unsplash.com/photo-1565967511849-76a60a516170?w=900&q=85&fit=crop" alt="Museum wayfinding" style="width:100%;height:100%;object-fit:cover;display:block;" />
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="feature-section">
+    <p style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-bottom:12px;">Design Decisions</p>
+    <h3>Restraint as a design material.</h3>
+    <div class="feature-grid">
+      <div class="feature-item">
+        <p class="f-label">Typography as Architecture</p>
+        <p>A single typeface family used across the entire site. Size, weight, and spacing do all the work. No decorative type. The hierarchy is structural, not ornamental.</p>
+      </div>
+      <div class="feature-item">
+        <p class="f-label">Image as Foreground</p>
+        <p>Every artwork gets a full viewport at some point in its journey through the site. No thumbnails. No grids that shrink the work. The art is always the subject.</p>
+      </div>
+      <div class="feature-item">
+        <p class="f-label">Motion with Purpose</p>
+        <p>Transitions are slow, deliberate, and directional. You always know where you came from and where you're going. Animation used to orient — never to decorate.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- OUTCOMES -->
+  <div class="outcomes-section">
+    <p style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted);">Outcomes</p>
+    <h3>What actually changed.</h3>
+    <div class="outcomes-grid">
+      <div class="outcome-item">
+        <p class="num">01</p>
+        <h4>Visitor Preparedness</h4>
+        <p>Surveys showed visitors arriving with more context about the collection — reducing the gap between the digital preview and the physical experience.</p>
+      </div>
+      <div class="outcome-item">
+        <p class="num">02</p>
+        <h4>Digital Engagement</h4>
+        <p>Time on site increased significantly. Visitors were reading exhibition notes, listening to audio guides, and returning after their visit to revisit works they'd seen.</p>
+      </div>
+      <div class="outcome-item">
+        <p class="num">03</p>
+        <h4>Institutional Identity</h4>
+        <p>The website became the museum's most visible communication. Press coverage of new exhibitions now consistently included the site as part of the experience.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="gallery-section">
+    <div class="gallery-main">
+      <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1200&q=85&fit=crop" alt="Museum gallery space" />
+    </div>
+    <div class="gallery-side">
+      <div class="gallery-side-top">
+        <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?w=600&q=85&fit=crop" alt="Artwork detail" />
+      </div>
+      <div class="gallery-side-bottom">
+        <img src="https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=600&q=85&fit=crop" alt="Exhibition night" />
+      </div>
+    </div>
+  </div>
+
+  <!-- NEXT: back to first project -->
+  <!-- SITE PREVIEW -->
+  <div class="preview-section">
+    <div class="preview-header">
+      <p class="project-tag">The Website</p>
+      <h3>Scrollable preview</h3>
+      <p class="preview-hint">↕ Scroll inside the frame to explore the full site</p>
+    </div>
+    <div class="preview-layout">
+
+      <!-- Desktop browser (institutional white) -->
+      <div class="browser-mockup">
+        <div class="browser-bar">
+          <div class="b-dots"><span class="b-dot r"></span><span class="b-dot y"></span><span class="b-dot g"></span></div>
+          <div class="b-url-bar">palomamuseum.in</div>
+        </div>
+        <div class="browser-scroll">
+          <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:#FFFFFF;color:#1A1A1A;min-height:100%;font-size:15px;line-height:1.6;">
+            <!-- Nav: pure white, hairline rule -->
+            <div style="background:#FFFFFF;border-bottom:1px solid #EBEBEB;padding:0 40px;height:54px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;">
+              <span style="font-size:11px;letter-spacing:0.22em;font-weight:400;text-transform:uppercase;color:#1A1A1A;">Paloma</span>
+              <div style="display:flex;gap:32px;">
+                <span style="font-size:10px;color:#9A9A9A;letter-spacing:0.14em;text-transform:uppercase;font-weight:300;">Visit</span>
+                <span style="font-size:10px;color:#9A9A9A;letter-spacing:0.14em;text-transform:uppercase;font-weight:300;">Exhibitions</span>
+                <span style="font-size:10px;color:#9A9A9A;letter-spacing:0.14em;text-transform:uppercase;font-weight:300;">Collection</span>
+                <span style="font-size:10px;color:#1A1A1A;letter-spacing:0.14em;text-transform:uppercase;font-weight:300;text-decoration:underline;text-underline-offset:4px;">Plan</span>
+              </div>
+            </div>
+            <!-- Hero: full-bleed greyscale gallery photo -->
+            <div style="position:relative;height:460px;overflow:hidden;border-bottom:1px solid #EBEBEB;">
+              <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=1200&q=80&fit=crop" alt="Gallery" style="width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(100%) brightness(0.88);" />
+              <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(255,255,255,0.96) 0%,rgba(255,255,255,0) 55%);"></div>
+              <div style="position:absolute;bottom:0;left:0;padding:44px 40px;">
+                <p style="font-size:9px;letter-spacing:0.20em;text-transform:uppercase;color:#9A9A9A;font-weight:300;margin-bottom:14px;">Now Showing · Gallery 04</p>
+                <h1 style="font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:52px;line-height:1.05;letter-spacing:-0.02em;color:#1A1A1A;margin-bottom:18px;">The Geometries</h1>
+                <div style="display:flex;gap:24px;align-items:center;">
+                  <div style="display:inline-flex;padding:10px 24px;border:1px solid #1A1A1A;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;font-weight:300;color:#1A1A1A;">Plan Visit</div>
+                  <span style="font-size:11px;color:#9A9A9A;font-weight:300;letter-spacing:0.04em;">14 Jan – 30 Mar 2025</span>
+                </div>
+              </div>
+            </div>
+            <!-- Info strip -->
+            <div style="padding:0 40px;border-bottom:1px solid #EBEBEB;display:flex;gap:0;">
+              <div style="flex:1;padding:22px 32px 22px 0;border-right:1px solid #EBEBEB;"><p style="font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:#9A9A9A;font-weight:300;margin-bottom:6px;">Admission</p><p style="font-size:13px;font-weight:200;color:#1A1A1A;">₹200 · Free on Tuesdays</p></div>
+              <div style="flex:1;padding:22px 32px;border-right:1px solid #EBEBEB;"><p style="font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:#9A9A9A;font-weight:300;margin-bottom:6px;">Hours</p><p style="font-size:13px;font-weight:200;color:#1A1A1A;">Tue–Sun, 10am – 6pm</p></div>
+              <div style="flex:1;padding:22px 0 22px 32px;"><p style="font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:#9A9A9A;font-weight:300;margin-bottom:6px;">Audio Guide</p><p style="font-size:13px;font-weight:200;color:#1A1A1A;">App &amp; at desk</p></div>
+            </div>
+            <!-- Collection: 4 greyscale artwork photos -->
+            <div style="padding:60px 40px;border-bottom:1px solid #EBEBEB;">
+              <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:32px;">
+                <div>
+                  <p style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:#9A9A9A;font-weight:300;margin-bottom:8px;">Collection</p>
+                  <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:34px;letter-spacing:-0.015em;color:#1A1A1A;font-weight:400;">Selected works.</h2>
+                </div>
+                <span style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#9A9A9A;font-weight:300;">View all →</span>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">
+                <div>
+                  <div style="aspect-ratio:3/4;overflow:hidden;margin-bottom:12px;">
+                    <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=400&q=80&fit=crop" alt="Artwork" style="width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(100%);" />
+                  </div>
+                  <p style="font-size:11px;font-family:'Cormorant Garamond',Georgia,serif;color:#1A1A1A;margin-bottom:3px;">Untitled (IV)</p>
+                  <p style="font-size:9px;color:#9A9A9A;font-weight:300;">A. Krishnamurthy, 2022</p>
+                </div>
+                <div>
+                  <div style="aspect-ratio:3/4;overflow:hidden;margin-bottom:12px;">
+                    <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?w=400&q=80&fit=crop" alt="Artwork" style="width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(100%);" />
+                  </div>
+                  <p style="font-size:11px;font-family:'Cormorant Garamond',Georgia,serif;color:#1A1A1A;margin-bottom:3px;">Still Study No. 3</p>
+                  <p style="font-size:9px;color:#9A9A9A;font-weight:300;">R. Sharma, 2019</p>
+                </div>
+                <div>
+                  <div style="aspect-ratio:3/4;overflow:hidden;margin-bottom:12px;">
+                    <img src="https://images.unsplash.com/photo-1578301978018-3005759f48f7?w=400&q=80&fit=crop" alt="Artwork" style="width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(100%);" />
+                  </div>
+                  <p style="font-size:11px;font-family:'Cormorant Garamond',Georgia,serif;color:#1A1A1A;margin-bottom:3px;">Black Ground</p>
+                  <p style="font-size:9px;color:#9A9A9A;font-weight:300;">T. Mehta, 2021</p>
+                </div>
+                <div>
+                  <div style="aspect-ratio:3/4;overflow:hidden;margin-bottom:12px;">
+                    <img src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=400&q=80&fit=crop" alt="Artwork" style="width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(100%);" />
+                  </div>
+                  <p style="font-size:11px;font-family:'Cormorant Garamond',Georgia,serif;color:#1A1A1A;margin-bottom:3px;">Form (After)</p>
+                  <p style="font-size:9px;color:#9A9A9A;font-weight:300;">S. Nair, 2023</p>
+                </div>
+              </div>
+            </div>
+            <!-- Exhibitions list on pure white -->
+            <div style="padding:60px 40px;border-bottom:1px solid #EBEBEB;">
+              <p style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:#9A9A9A;font-weight:300;margin-bottom:8px;">Exhibitions</p>
+              <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:34px;letter-spacing:-0.015em;color:#1A1A1A;margin-bottom:36px;">What's on.</h2>
+              <div style="border-top:1px solid #EBEBEB;">
+                <div style="padding:28px 0;border-bottom:1px solid #EBEBEB;display:flex;justify-content:space-between;align-items:start;">
+                  <div><p style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:#9A9A9A;font-weight:300;margin-bottom:10px;">Current · Gallery 04</p><p style="font-size:19px;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;color:#1A1A1A;margin-bottom:6px;">The Geometries</p><p style="font-size:12px;font-weight:200;color:#9A9A9A;max-width:44ch;line-height:1.8;">Geometric abstraction across six decades, from hard-edge to minimalism.</p></div>
+                  <div style="text-align:right;white-space:nowrap;padding-left:24px;flex-shrink:0;"><p style="font-size:10px;color:#9A9A9A;font-weight:300;">14 Jan – 30 Mar 2025</p></div>
+                </div>
+                <div style="padding:28px 0;border-bottom:1px solid #EBEBEB;display:flex;justify-content:space-between;align-items:start;">
+                  <div><p style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:#9A9A9A;font-weight:300;margin-bottom:10px;">Permanent · Galleries 01–03</p><p style="font-size:19px;font-family:'Cormorant Garamond',Georgia,serif;color:#1A1A1A;margin-bottom:6px;">The Permanent Collection</p><p style="font-size:12px;font-weight:200;color:#9A9A9A;max-width:44ch;line-height:1.8;">Works from 1960 to the present: painting, sculpture, new media.</p></div>
+                  <div style="text-align:right;white-space:nowrap;padding-left:24px;flex-shrink:0;"><p style="font-size:10px;color:#9A9A9A;font-weight:300;">Year-round</p></div>
+                </div>
+                <div style="padding:28px 0;display:flex;justify-content:space-between;align-items:start;">
+                  <div><p style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:#9A9A9A;font-weight:300;margin-bottom:10px;">Upcoming · Gallery 06</p><p style="font-size:19px;font-family:'Cormorant Garamond',Georgia,serif;color:#1A1A1A;margin-bottom:6px;">Tender Infrastructures</p><p style="font-size:12px;font-weight:200;color:#9A9A9A;max-width:44ch;line-height:1.8;">Five artists exploring care, systems, and the body as architecture.</p></div>
+                  <div style="text-align:right;white-space:nowrap;padding-left:24px;flex-shrink:0;"><p style="font-size:10px;color:#9A9A9A;font-weight:300;">Opens 12 Apr 2025</p></div>
+                </div>
+              </div>
+            </div>
+            <!-- Visit info — clean white grid -->
+            <div style="padding:60px 40px;border-bottom:1px solid #EBEBEB;">
+              <p style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:#9A9A9A;font-weight:300;margin-bottom:8px;">Plan Your Visit</p>
+              <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:34px;letter-spacing:-0.015em;color:#1A1A1A;margin-bottom:40px;">Come prepared.</h2>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-top:1px solid #EBEBEB;">
+                <div style="padding:32px 32px 32px 0;border-right:1px solid #EBEBEB;"><p style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:#9A9A9A;font-weight:300;margin-bottom:16px;">Hours</p><p style="font-size:13px;font-weight:200;color:#1A1A1A;line-height:2.4;">Tue – Fri: 10am – 6pm<br/>Saturday: 10am – 8pm<br/>Sunday: 11am – 5pm<br/>Closed Mondays</p></div>
+                <div style="padding:32px;border-right:1px solid #EBEBEB;"><p style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:#9A9A9A;font-weight:300;margin-bottom:16px;">Admission</p><p style="font-size:13px;font-weight:200;color:#1A1A1A;line-height:2.4;">Adults: ₹200<br/>Students: ₹100<br/>Under 12: Free<br/>Tuesdays: Free</p></div>
+                <div style="padding:32px 0 32px 32px;"><p style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:#9A9A9A;font-weight:300;margin-bottom:16px;">Location</p><p style="font-size:13px;font-weight:200;color:#1A1A1A;line-height:2.4;">3 Museum Road<br/>Banjara Hills<br/>Hyderabad 500034</p></div>
+              </div>
+            </div>
+            <!-- Footer -->
+            <div style="padding:16px 40px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid #EBEBEB;">
+              <span style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;font-weight:300;color:#1A1A1A;">Paloma</span>
+              <div style="display:flex;gap:24px;"><span style="font-size:10px;color:#C8C8C8;font-weight:300;letter-spacing:0.08em;">instagram</span><span style="font-size:10px;color:#C8C8C8;font-weight:300;letter-spacing:0.08em;">newsletter</span><span style="font-size:10px;color:#C8C8C8;font-weight:300;letter-spacing:0.08em;">press</span></div>
+              <span style="font-size:10px;color:#C8C8C8;font-weight:300;">© 2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile column -->
+      <div class="mobile-col">
+        <!-- Phone 1: Homepage -->
+        <div class="phone-mockup">
+          <div class="phone-bar"><div class="phone-notch"></div><div class="phone-url">palomamuseum.in</div></div>
+          <div class="phone-scroll">
+            <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:#FFFFFF;color:#1A1A1A;">
+              <div style="background:#FFFFFF;border-bottom:1px solid #EBEBEB;padding:0 14px;height:36px;display:flex;align-items:center;justify-content:space-between;"><span style="font-size:10px;letter-spacing:0.20em;text-transform:uppercase;font-weight:300;">Paloma</span><span style="font-size:14px;color:#9A9A9A;">☰</span></div>
+              <!-- Mobile hero: greyscale gallery photo -->
+              <div style="position:relative;height:240px;overflow:hidden;border-bottom:1px solid #EBEBEB;">
+                <img src="https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=600&q=80&fit=crop" alt="Gallery" style="width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(100%) brightness(0.85);" />
+                <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(255,255,255,0.95) 0%,rgba(255,255,255,0) 50%);"></div>
+                <div style="position:absolute;bottom:0;left:0;padding:16px 14px;">
+                  <p style="font-size:8px;letter-spacing:0.18em;text-transform:uppercase;color:#9A9A9A;font-weight:300;margin-bottom:8px;">Now Showing</p>
+                  <h1 style="font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:24px;line-height:1.1;color:#1A1A1A;margin-bottom:12px;">The Geometries</h1>
+                  <div style="display:inline-flex;padding:7px 14px;border:1px solid #1A1A1A;font-size:8px;letter-spacing:0.14em;text-transform:uppercase;font-weight:300;color:#1A1A1A;">Plan Visit</div>
+                </div>
+              </div>
+              <!-- Info strip -->
+              <div style="padding:0 14px;border-bottom:1px solid #EBEBEB;display:flex;gap:0;">
+                <div style="flex:1;padding:14px 14px 14px 0;border-right:1px solid #EBEBEB;"><p style="font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:#9A9A9A;font-weight:300;margin-bottom:4px;">Admission</p><p style="font-size:11px;font-weight:200;color:#1A1A1A;">₹200</p></div>
+                <div style="flex:1;padding:14px 0 14px 14px;"><p style="font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:#9A9A9A;font-weight:300;margin-bottom:4px;">Hours</p><p style="font-size:11px;font-weight:200;color:#1A1A1A;">Tue–Sun, 10–6</p></div>
+              </div>
+              <!-- Mini artwork grid -->
+              <div style="padding:18px 14px;border-bottom:1px solid #EBEBEB;">
+                <p style="font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:#9A9A9A;font-weight:300;margin-bottom:14px;">Collection</p>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                  <div><img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=300&q=80&fit=crop" alt="" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;filter:grayscale(100%);" /><p style="font-size:9px;font-family:'Cormorant Garamond',Georgia,serif;color:#1A1A1A;margin-top:6px;">Untitled (IV)</p></div>
+                  <div><img src="https://images.unsplash.com/photo-1549490349-8643362247b5?w=300&q=80&fit=crop" alt="" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;filter:grayscale(100%);" /><p style="font-size:9px;font-family:'Cormorant Garamond',Georgia,serif;color:#1A1A1A;margin-top:6px;">Still Study No. 3</p></div>
+                </div>
+              </div>
+              <!-- Exhibitions list -->
+              <div style="padding:18px 14px;">
+                <p style="font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:#9A9A9A;font-weight:300;margin-bottom:14px;">Exhibitions</p>
+                <div style="border-top:1px solid #EBEBEB;">
+                  <div style="padding:12px 0;border-bottom:1px solid #EBEBEB;"><p style="font-size:12px;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;color:#1A1A1A;">The Geometries</p><p style="font-size:8px;color:#9A9A9A;font-weight:300;margin-top:3px;">Now · Gallery 04</p></div>
+                  <div style="padding:12px 0;border-bottom:1px solid #EBEBEB;"><p style="font-size:12px;font-family:'Cormorant Garamond',Georgia,serif;color:#1A1A1A;">Permanent Collection</p><p style="font-size:8px;color:#9A9A9A;font-weight:300;margin-top:3px;">Year-round · Galleries 01–03</p></div>
+                  <div style="padding:12px 0;"><p style="font-size:12px;font-family:'Cormorant Garamond',Georgia,serif;color:#1A1A1A;">Tender Infrastructures</p><p style="font-size:8px;color:#9A9A9A;font-weight:300;margin-top:3px;">Opens Apr 12 · Gallery 06</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Phone 2: Artwork detail -->
+        <div class="phone-mockup">
+          <div class="phone-bar"><div class="phone-notch"></div><div class="phone-url">palomamuseum.in/work/07</div></div>
+          <div class="phone-scroll">
+            <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:#FFFFFF;color:#1A1A1A;">
+              <div style="background:#FFFFFF;border-bottom:1px solid #EBEBEB;padding:0 14px;height:36px;display:flex;align-items:center;justify-content:space-between;"><span style="font-size:10px;letter-spacing:0.20em;text-transform:uppercase;font-weight:300;">Paloma</span><span style="font-size:14px;color:#9A9A9A;">☰</span></div>
+              <!-- Full artwork photo greyscale -->
+              <div style="height:220px;overflow:hidden;border-bottom:1px solid #EBEBEB;">
+                <img src="https://images.unsplash.com/photo-1578301978018-3005759f48f7?w=500&q=80&fit=crop" alt="Artwork" style="width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(100%);" />
+              </div>
+              <div style="padding:20px 14px;">
+                <p style="font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:#9A9A9A;font-weight:300;margin-bottom:8px;">Gallery 04 · Work 07</p>
+                <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;font-weight:400;margin-bottom:4px;color:#1A1A1A;">Untitled (Series IV)</h2>
+                <p style="font-size:12px;color:#9A9A9A;font-weight:300;margin-bottom:20px;">Ananya Krishnamurthy, 2022</p>
+                <div style="border-top:1px solid #EBEBEB;padding-top:16px;">
+                  <p style="font-size:10px;color:#9A9A9A;font-weight:300;margin-bottom:5px;">Oil on canvas</p>
+                  <p style="font-size:10px;color:#9A9A9A;font-weight:300;margin-bottom:5px;">180 × 240 cm</p>
+                  <p style="font-size:10px;color:#9A9A9A;font-weight:300;margin-bottom:20px;">Collection of Paloma Museum</p>
+                  <div style="border:1px solid #EBEBEB;padding:10px 14px;"><span style="font-size:9px;letter-spacing:0.12em;text-transform:uppercase;font-weight:300;color:#1A1A1A;">▶ Audio Guide · 4:22</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <a href="cafe.html" class="next-project">
+    <div class="next-left">
+      <p class="label">Back to start</p>
+      <h3>Café Mora</h3>
+      <span class="arrow">↩</span>
+    </div>
+    <div class="next-right">
+      <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=80&fit=crop" alt="Café Mora" />
+    </div>
+  </a>
+
+  <footer>
+    <a href="index.html">← suryar.studio</a>
+    <span>© 2025</span>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iron Clutch — suryar.studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500&family=Barlow+Condensed:wght@300;400;500;600&family=Space+Mono&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #060604;
+      --ink: #D8D5D0;
+      --muted: #4A4A46;
+      --rule: #1E1E1C;
+      --gold: #B87830;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'Inter', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* IRON CLUTCH TYPOGRAPHIC STYLE */
+    h1, h3, h4 { letter-spacing: -0.02em; }
+    .section-label, .f-label, .project-tag, .num, .label {
+      font-size: 10px !important;
+      letter-spacing: 0.14em !important;
+      text-transform: uppercase !important;
+      color: var(--gold) !important;
+      font-weight: 500 !important;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 60px;
+      background: #070706;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-brand { font-size: 17px; font-weight: 700; color: var(--muted); text-decoration: none; transition: color 0.2s; letter-spacing: 0.04em; }
+    .nav-brand:hover { color: var(--ink); }
+    .nav-back { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: var(--ink); }
+
+    /* DARK HERO */
+    .project-hero {
+      min-height: 100vh;
+      background: #0E0E0C;
+      padding-top: 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid #222220;
+    }
+
+    .hero-content {
+      padding: 80px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid #222220;
+    }
+
+    .project-tag { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #4A4A48; }
+
+    .hero-content h1 {
+      font-family: var(--serif);
+      font-size: clamp(48px, 6vw, 88px);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      color: #E8E4DC;
+      margin-top: 40px;
+    }
+
+    .hero-content .sub {
+      font-size: 16px;
+      font-weight: 300;
+      color: #5A5A56;
+      max-width: 44ch;
+      line-height: 1.8;
+      margin-top: 24px;
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      border-top: 1px solid #222220;
+      padding-top: 32px;
+    }
+
+    .meta-item .label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #3A3A38; display: block; margin-bottom: 6px; }
+    .meta-item .value { font-size: 14px; font-weight: 400; color: #8A8A84; }
+
+    .hero-visual {
+      background: #080808;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* BRIEF */
+    .brief-section { display: grid; grid-template-columns: 1fr 2fr; border-bottom: 1px solid var(--rule); background: #0E0E0C; }
+    .brief-label { padding: 64px 48px; border-right: 1px solid var(--rule); }
+    .brief-label h2 { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); position: sticky; top: 80px; font-weight: 500; }
+    .brief-content { padding: 64px 48px; }
+    .brief-content p { font-size: 17px; font-weight: 300; line-height: 1.9; color: #A0A09A; max-width: 56ch; }
+    .brief-content p + p { margin-top: 24px; }
+
+    /* DARK FEATURE STRIP */
+    .feature-strip {
+      background: #111110;
+      padding: 80px 48px;
+      border-bottom: 1px solid #222220;
+    }
+
+    .feature-strip h3 {
+      font-family: var(--serif);
+      font-size: clamp(28px, 3vw, 42px);
+      color: #E8E4DC;
+      letter-spacing: -0.01em;
+      margin-bottom: 56px;
+      margin-top: 12px;
+      max-width: 20ch;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid #222220;
+    }
+
+    .feature-item {
+      padding: 40px 40px 40px 0;
+      border-right: 1px solid #222220;
+    }
+
+    .feature-item:last-child { border-right: none; padding-right: 0; }
+    .feature-item:not(:first-child) { padding-left: 40px; }
+
+    .feature-item .f-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #3A3A38; }
+    .feature-item p { font-size: 14px; font-weight: 300; color: #5A5A54; line-height: 1.8; margin-top: 16px; }
+
+    /* SPLIT */
+    .split-section { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--rule); min-height: 480px; background: #0E0E0C; }
+    .split-text { padding: 64px 48px; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid var(--rule); }
+    .split-text h3 { font-family: var(--serif); font-size: clamp(24px, 3vw, 36px); line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 20px; margin-top: 12px; color: var(--ink); }
+    .split-text p { font-size: 14px; font-weight: 300; color: #5A5A54; line-height: 1.9; max-width: 40ch; }
+    .split-visual { display: flex; align-items: center; justify-content: center; overflow: hidden; }
+
+    /* OUTCOMES */
+    .outcomes-section { padding: 80px 48px; border-bottom: 1px solid var(--rule); background: #0A0A08; }
+    .outcomes-section h3 { font-family: var(--serif); font-size: clamp(28px, 3vw, 42px); line-height: 1.1; margin-top: 12px; margin-bottom: 56px; max-width: 18ch; color: var(--ink); }
+    .outcomes-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--rule); }
+    .outcome-item { padding: 40px 40px 40px 0; border-right: 1px solid var(--rule); }
+    .outcome-item:last-child { border-right: none; padding-right: 0; }
+    .outcome-item:not(:first-child) { padding-left: 40px; }
+    .outcome-item h4 { font-family: var(--serif); font-size: 22px; margin-top: 16px; margin-bottom: 10px; color: #C0BCB4; }
+    .outcome-item p { font-size: 13px; font-weight: 300; color: #484844; line-height: 1.75; }
+
+    /* GALLERY */
+    .gallery-section { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--rule); min-height: 500px; }
+    .gallery-main { background: #080808; display: flex; align-items: center; justify-content: center; border-right: 1px solid #1A1A18; overflow: hidden; }
+    .gallery-side { display: flex; flex-direction: column; }
+    .gallery-side-top { background: #101010; flex: 1; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #1A1A18; overflow: hidden; }
+    .gallery-side-bottom { background: #0A0A08; flex: 1; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .gallery-main img, .gallery-side-top img, .gallery-side-bottom img { width:100%; height:100%; object-fit:cover; display:block; opacity:0.88; }
+
+    /* NEXT */
+    .next-project { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink); min-height: 240px; transition: opacity 0.2s; background: #0A0A08; }
+    .next-project:hover { opacity: 0.85; }
+    .next-left { padding: 64px 48px; border-right: 1px solid var(--rule); display: flex; flex-direction: column; justify-content: space-between; }
+    .next-left h3 { font-family: var(--serif); font-size: clamp(28px, 3vw, 44px); line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); }
+    .next-left .arrow { font-size: 24px; align-self: flex-end; color: var(--gold); }
+    .next-right { background: #080808; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+    .next-right img { width:100%; height:100%; object-fit:cover; display:block; opacity:0.5; }
+
+    footer { display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 56px; background: #070706; border-top: 1px solid var(--rule); }
+    footer a, footer span { font-size: 12px; color: var(--muted); text-decoration: none; }
+    footer a { font-size: 17px; font-weight: 700; }
+    footer a:hover { color: var(--ink); }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .project-hero { grid-template-columns: 1fr; }
+      .hero-content { padding: 60px 24px; border-right: none; border-bottom: 1px solid #222220; }
+      .hero-visual { min-height: 320px; }
+      .brief-section { grid-template-columns: 1fr; }
+      .brief-label { padding: 32px 24px; border-right: none; }
+      .brief-content { padding: 32px 24px; }
+      .feature-strip { padding: 60px 24px; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .feature-item { border-right: none; border-bottom: 1px solid #222220; padding: 32px 0; }
+      .feature-item:not(:first-child) { padding-left: 0; }
+      .split-section { grid-template-columns: 1fr; }
+      .split-text { border-right: none; border-bottom: 1px solid var(--rule); padding: 48px 24px; }
+      .split-visual { min-height: 280px; }
+      .outcomes-section { padding: 60px 24px; }
+      .outcomes-grid { grid-template-columns: 1fr; }
+      .outcome-item { border-right: none; padding: 32px 0; border-bottom: 1px solid var(--rule); }
+      .outcome-item:not(:first-child) { padding-left: 0; }
+      .gallery-section { grid-template-columns: 1fr; }
+      .gallery-main { min-height: 300px; border-right: none; border-bottom: 1px solid #222220; }
+      .gallery-side { flex-direction: row; min-height: 200px; }
+      .gallery-side-top { border-bottom: none; border-right: 1px solid #222220; }
+      .next-project { grid-template-columns: 1fr; }
+      .next-left { padding: 48px 24px; border-right: none; border-bottom: 1px solid var(--rule); }
+      .next-right { min-height: 200px; }
+      footer { padding: 0 24px; }
+    }
+    /* ── SITE PREVIEW ── */
+    .preview-section { padding: 80px 48px; border-bottom: 1px solid var(--rule); background: #0A0A08; }
+    .preview-header { margin-bottom: 40px; }
+    .preview-header h3 { font-family: var(--serif); font-size: clamp(24px,2.5vw,36px); line-height: 1.1; letter-spacing: -0.01em; margin-top: 12px; margin-bottom: 8px; }
+    .preview-hint { font-size: 12px; font-weight: 300; color: var(--muted); margin-top: 6px; }
+    .preview-layout { display: grid; grid-template-columns: 3fr 1fr; gap: 28px; align-items: start; }
+    .browser-mockup { border-radius: 10px; overflow: hidden; border: 1px solid var(--rule); box-shadow: 0 8px 40px rgba(0,0,0,0.09); }
+    .browser-bar { background: #1E1E1C; padding: 10px 14px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #2A2A28; }
+    .b-dots { display: flex; gap: 5px; }
+    .b-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .b-dot.r { background: #F09090; } .b-dot.y { background: #F0C88A; } .b-dot.g { background: #98CA88; }
+    .b-url-bar { flex: 1; text-align: center; font-size: 11px; color: #4A4A48; background: #111110; border: 1px solid #2A2A28; border-radius: 5px; padding: 4px 12px; letter-spacing: 0.02em; }
+    .browser-scroll { height: 560px; overflow-y: scroll; overflow-x: hidden; scrollbar-width: thin; scrollbar-color: #2A2A28 transparent; }
+    .browser-scroll::-webkit-scrollbar { width: 4px; } .browser-scroll::-webkit-scrollbar-thumb { background: #2A2A28; border-radius: 2px; }
+    .mobile-col { display: flex; flex-direction: column; gap: 20px; }
+    .phone-mockup { border-radius: 22px; overflow: hidden; border: 1px solid #222220; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+    .phone-bar { background: #1A1A18; padding: 10px 14px 8px; display: flex; flex-direction: column; align-items: center; gap: 7px; border-bottom: 1px solid #222220; }
+    .phone-notch { width: 44px; height: 5px; background: #2A2A28; border-radius: 3px; }
+    .phone-url { font-size: 9px; color: #4A4A48; background: #111110; border: 1px solid #2A2A28; border-radius: 8px; padding: 2px 10px; width: 100%; text-align: center; letter-spacing: 0.02em; }
+    .phone-scroll { max-height: 260px; overflow-y: scroll; overflow-x: hidden; scrollbar-width: none; }
+    .phone-scroll::-webkit-scrollbar { display: none; }
+    @media (max-width: 900px) { .preview-section { padding: 60px 24px !important; } .preview-layout { grid-template-columns: 1fr !important; } .mobile-col { flex-direction: row; } .phone-scroll { max-height: 180px; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-brand">suryar.studio</a>
+    <a href="index.html" class="nav-back">← All work</a>
+  </nav>
+
+  <!-- HERO (dark) -->
+  <div class="project-hero">
+    <div class="hero-content">
+      <div>
+        <p class="project-tag">Project 02 / 03</p>
+        <h1>Iron Clutch</h1>
+        <p class="sub">An automobile enthusiast shop with a cult following. Replatformed their digital presence to match the precision and obsession of the community they serve.</p>
+      </div>
+      <div class="hero-meta">
+        <div class="meta-item"><span class="label">Scope</span><span class="value">Web Design, Systems</span></div>
+        <div class="meta-item"><span class="label">Year</span><span class="value">2025</span></div>
+        <div class="meta-item"><span class="label">Deliverables</span><span class="value">Website, Product System, Brand Refresh</span></div>
+        <div class="meta-item"><span class="label">Role</span><span class="value">Design Direction & Execution</span></div>
+      </div>
+    </div>
+    <div class="hero-visual" style="background:#000;">
+      <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1400&q=85&fit=crop" alt="Iron Clutch — built for the obsessive" style="width:100%;height:100%;object-fit:cover;opacity:0.8;display:block;" />
+    </div>
+  </div>
+
+  <!-- BRIEF -->
+  <div class="brief-section">
+    <div class="brief-label"><h2>The Brief</h2></div>
+    <div class="brief-content">
+      <p>Iron Clutch had something rare — a genuinely devoted community of automobile enthusiasts who found each other through their shop. Modified cars, aftermarket parts, restoration projects, weekend meets. The culture was real and specific.</p>
+      <p>Their website was not. It had been cobbled together, suffered five years of neglect, and felt like it belonged to a different business entirely. The community didn't care — they came for the parts and the people. But the business was leaving reach on the table.</p>
+      <p>The brief: build something obsessive, precise, and built for people who care. No lifestyle photography. No stock cars. Just craft, catalogued with the same attention to detail that their customers bring to their builds.</p>
+    </div>
+  </div>
+
+  <!-- DARK FEATURE STRIP -->
+  <div class="feature-strip">
+    <p style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:#3A3A38; margin-bottom: 12px;">Design Principles</p>
+    <h3>Built for people who notice everything.</h3>
+    <div class="feature-grid">
+      <div class="feature-item">
+        <p class="f-label">Dark-first UI</p>
+        <p>Designed primarily for night browsing. The colour system uses carbon, graphite, and bare metal tones — pulled directly from the material language of the workshop.</p>
+      </div>
+      <div class="feature-item">
+        <p class="f-label">Catalogue Precision</p>
+        <p>Every part page has spec tables, compatibility guides, and fitment notes. Information density is high — but the hierarchy is so clean it never feels overwhelming.</p>
+      </div>
+      <div class="feature-item">
+        <p class="f-label">Community First</p>
+        <p>The site's secondary purpose is a build diary hub. Members document their projects, link the parts they used, and build a living catalogue of real-world applications.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPLIT: Product System -->
+  <div class="split-section">
+    <div class="split-text">
+      <p class="section-label">Product System</p>
+      <h3>Every spec, in its right place.</h3>
+      <p>The product page template was redesigned from scratch. Part number, compatibility matrix, weight, material, finish — all surfaced without clutter. A typographic system rigorous enough for engineers, clean enough for enthusiasts.</p>
+    </div>
+    <div class="split-visual" style="background:#0A0A08;">
+      <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=900&q=85&fit=crop" alt="Iron Clutch product system" style="width:100%;height:100%;object-fit:cover;opacity:0.85;display:block;" />
+    </div>
+  </div>
+
+  <!-- SPLIT: Brand (reversed) -->
+  <div class="split-section" style="direction:rtl;">
+    <div class="split-text" style="direction:ltr;">
+      <p class="section-label">Brand Refresh</p>
+      <h3>The logo was the last thing we touched.</h3>
+      <p>The mark — a stylised clutch disc — had been with them for years. The community recognised it. We refined the geometry, tightened the letterforms, and built a type system around it. Nothing you'd notice. Everything you'd feel.</p>
+    </div>
+    <div class="split-visual" style="direction:ltr; background:#060604; position:relative; overflow:hidden;">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=85&fit=crop" alt="Iron Clutch brand mark" style="width:100%;height:100%;object-fit:cover;opacity:0.7;display:block;" />
+      <div style="position:absolute;bottom:36px;left:40px;right:40px;">
+        <p style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#B87830;font-family:'Inter',sans-serif;font-weight:500;">Iron Clutch · Est. 2019</p>
+        <p style="font-family:'DM Serif Display',Georgia,serif;font-size:28px;color:#D8D5D0;line-height:1.2;margin-top:8px;">The mark, refined.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- OUTCOMES -->
+  <div class="outcomes-section">
+    <p style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted);">Outcomes</p>
+    <h3>What actually changed.</h3>
+    <div class="outcomes-grid">
+      <div class="outcome-item">
+        <p class="num">01</p>
+        <h4>Digital Sales</h4>
+        <p>Online part orders, previously negligible, became a meaningful revenue stream within two months of launch. The catalogue finally worked as a sales tool, not just a list.</p>
+      </div>
+      <div class="outcome-item">
+        <p class="num">02</p>
+        <h4>Community Growth</h4>
+        <p>The build diary feature drove a significant uptick in account registrations. Members now had a reason to be on the site beyond purchasing.</p>
+      </div>
+      <div class="outcome-item">
+        <p class="num">03</p>
+        <h4>Brand Legitimacy</h4>
+        <p>The refresh gave the shop credibility that matched what the community already knew — that Iron Clutch was serious about their craft.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="gallery-section">
+    <div class="gallery-main">
+      <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&q=85&fit=crop" alt="Iron Clutch workshop" />
+    </div>
+    <div class="gallery-side">
+      <div class="gallery-side-top">
+        <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&q=85&fit=crop" alt="Performance parts" />
+      </div>
+      <div class="gallery-side-bottom">
+        <img src="https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?w=600&q=85&fit=crop" alt="Car detail" />
+      </div>
+    </div>
+  </div>
+
+  <!-- SITE PREVIEW -->
+  <div class="preview-section">
+    <div class="preview-header">
+      <p class="project-tag">The Website</p>
+      <h3>Scrollable preview</h3>
+      <p class="preview-hint">↕ Scroll inside the frame to explore the full site</p>
+    </div>
+    <div class="preview-layout">
+
+      <!-- Desktop browser (dark industrial) -->
+      <div class="browser-mockup">
+        <div class="browser-bar">
+          <div class="b-dots"><span class="b-dot r"></span><span class="b-dot y"></span><span class="b-dot g"></span></div>
+          <div class="b-url-bar">ironclutch.in</div>
+        </div>
+        <div class="browser-scroll">
+          <div style="font-family:'Barlow Condensed',Arial,sans-serif;background:#080806;color:#D8D5D0;min-height:100%;font-size:15px;line-height:1.6;">
+            <!-- Nav -->
+            <div style="background:#060604;border-bottom:1px solid #1A1A18;padding:0 36px;height:50px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;">
+              <span style="font-size:11px;letter-spacing:0.18em;font-weight:500;color:#D8D5D0;text-transform:uppercase;">Iron Clutch</span>
+              <div style="display:flex;gap:28px;">
+                <span style="font-size:10px;color:#C88C30;letter-spacing:0.14em;text-transform:uppercase;">Shop</span>
+                <span style="font-size:10px;color:#4A4A46;letter-spacing:0.14em;text-transform:uppercase;">Builds</span>
+                <span style="font-size:10px;color:#4A4A46;letter-spacing:0.14em;text-transform:uppercase;">About</span>
+              </div>
+            </div>
+            <!-- Full-bleed hero photo -->
+            <div style="position:relative;height:480px;overflow:hidden;">
+              <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1200&q=80&fit=crop" alt="Sports car" style="width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.55);" />
+              <div style="position:absolute;inset:0;background:linear-gradient(to top,#080806 28%,transparent 70%);"></div>
+              <div style="position:absolute;bottom:0;left:0;padding:44px 36px;">
+                <p style="font-size:9px;letter-spacing:0.20em;text-transform:uppercase;color:#C88C30;margin-bottom:16px;">Automobile Enthusiasts · Est. 2019</p>
+                <h1 style="font-family:'Barlow Condensed',Arial,sans-serif;font-size:62px;font-weight:600;line-height:0.95;letter-spacing:0.01em;text-transform:uppercase;color:#F0EDE8;margin-bottom:20px;">Built for<br/>the<br/>obsessive.</h1>
+                <div style="display:inline-flex;align-items:center;gap:8px;padding:11px 24px;background:#C88C30;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#080806;font-weight:600;margin-top:8px;">Shop Parts ↗</div>
+              </div>
+            </div>
+            <!-- Amber ticker -->
+            <div style="background:#C88C30;padding:9px 36px;">
+              <p style="font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:#1A0E04;font-weight:600;white-space:nowrap;">New Stock: BBS RS-GT &nbsp;·&nbsp; Bilstein B16 &nbsp;·&nbsp; Rays Volk TE37 &nbsp;·&nbsp; Ships India-wide &nbsp;·&nbsp; Precision. Every time.</p>
+            </div>
+            <!-- Category strip -->
+            <div style="padding:0 36px;border-bottom:1px solid #1A1A18;display:flex;gap:0;">
+              <span style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#C88C30;padding:14px 20px 14px 0;border-right:1px solid #1A1A18;">Wheels</span>
+              <span style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#3A3A38;padding:14px 20px;border-right:1px solid #1A1A18;">Suspension</span>
+              <span style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#3A3A38;padding:14px 20px;border-right:1px solid #1A1A18;">Engine</span>
+              <span style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#3A3A38;padding:14px 20px;border-right:1px solid #1A1A18;">Interior</span>
+              <span style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#3A3A38;padding:14px 20px;">Exterior</span>
+            </div>
+            <!-- Products with real photos -->
+            <div style="padding:52px 36px;border-bottom:1px solid #1A1A18;">
+              <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:32px;">
+                <div>
+                  <p style="font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:#C88C30;margin-bottom:6px;">Featured Parts</p>
+                  <h2 style="font-family:'Barlow Condensed',Arial,sans-serif;font-size:36px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#D8D5D0;">Shop the latest.</h2>
+                </div>
+                <span style="font-size:10px;letter-spacing:0.10em;text-transform:uppercase;color:#4A4A46;">View all →</span>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+                <!-- Card 1: alloy wheel -->
+                <div style="background:#0E0E0C;border:1px solid #1A1A18;overflow:hidden;">
+                  <div style="height:160px;overflow:hidden;">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80&fit=crop" alt="Alloy wheel" style="width:100%;height:100%;object-fit:cover;display:block;" />
+                  </div>
+                  <div style="padding:14px 14px 16px;">
+                    <p style="font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:#3A3A38;margin-bottom:6px;">18" Forged Alloy</p>
+                    <p style="font-size:14px;color:#C8C4BC;margin-bottom:10px;letter-spacing:0.01em;">BBS RS-GT</p>
+                    <p style="font-size:13px;color:#C88C30;font-weight:500;">₹48,000</p>
+                  </div>
+                </div>
+                <!-- Card 2: coilover/suspension -->
+                <div style="background:#0E0E0C;border:1px solid #1A1A18;overflow:hidden;">
+                  <div style="height:160px;overflow:hidden;">
+                    <img src="https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=500&q=80&fit=crop" alt="Suspension" style="width:100%;height:100%;object-fit:cover;display:block;" />
+                  </div>
+                  <div style="padding:14px 14px 16px;">
+                    <p style="font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:#3A3A38;margin-bottom:6px;">Coilover Kit</p>
+                    <p style="font-size:14px;color:#C8C4BC;margin-bottom:10px;letter-spacing:0.01em;">Bilstein B16</p>
+                    <p style="font-size:13px;color:#C88C30;font-weight:500;">₹72,000</p>
+                  </div>
+                </div>
+                <!-- Card 3: engine/intake -->
+                <div style="background:#0E0E0C;border:1px solid #1A1A18;overflow:hidden;">
+                  <div style="height:160px;overflow:hidden;">
+                    <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=500&q=80&fit=crop" alt="Engine intake" style="width:100%;height:100%;object-fit:cover;display:block;" />
+                  </div>
+                  <div style="padding:14px 14px 16px;">
+                    <p style="font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:#3A3A38;margin-bottom:6px;">Intake Kit</p>
+                    <p style="font-size:14px;color:#C8C4BC;margin-bottom:10px;letter-spacing:0.01em;">K&amp;N Cold Air</p>
+                    <p style="font-size:13px;color:#C88C30;font-weight:500;">₹18,500</p>
+                  </div>
+                </div>
+              </div>
+              <!-- List products row -->
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px;">
+                <div style="background:#0E0E0C;border:1px solid #1A1A18;padding:14px;display:flex;justify-content:space-between;align-items:center;">
+                  <div><p style="font-size:13px;color:#C8C4BC;margin-bottom:3px;">Rays Volk TE37</p><p style="font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:#3A3A38;">17" · Bronze</p></div>
+                  <p style="font-size:12px;color:#C88C30;font-weight:500;">₹56,000</p>
+                </div>
+                <div style="background:#0E0E0C;border:1px solid #1A1A18;padding:14px;display:flex;justify-content:space-between;align-items:center;">
+                  <div><p style="font-size:13px;color:#C8C4BC;margin-bottom:3px;">Hawk HPS Pads</p><p style="font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:#3A3A38;">Front &amp; Rear Set</p></div>
+                  <p style="font-size:12px;color:#C88C30;font-weight:500;">₹9,200</p>
+                </div>
+                <div style="background:#0E0E0C;border:1px solid #1A1A18;padding:14px;display:flex;justify-content:space-between;align-items:center;">
+                  <div><p style="font-size:13px;color:#C8C4BC;margin-bottom:3px;">Cusco Strut Bar</p><p style="font-size:9px;letter-spacing:0.10em;text-transform:uppercase;color:#3A3A38;">Front Tower Brace</p></div>
+                  <p style="font-size:12px;color:#C88C30;font-weight:500;">₹14,800</p>
+                </div>
+              </div>
+            </div>
+            <!-- Feature build photo + text -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #1A1A18;">
+              <div style="height:340px;overflow:hidden;">
+                <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=700&q=80&fit=crop" alt="Car build" style="width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.7);" />
+              </div>
+              <div style="padding:44px 36px;background:#060604;display:flex;flex-direction:column;justify-content:center;">
+                <p style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:#C88C30;margin-bottom:20px;">Community</p>
+                <h2 style="font-family:'Barlow Condensed',Arial,sans-serif;font-size:32px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#D8D5D0;line-height:1.2;margin-bottom:20px;">Build diaries.</h2>
+                <div style="border-top:1px solid #1A1A18;">
+                  <div style="padding:14px 0;border-bottom:1px solid #1A1A18;display:flex;justify-content:space-between;"><span style="font-size:12px;color:#C8C4BC;">Honda Civic EK9</span><span style="font-size:10px;color:#3A3A38;">View →</span></div>
+                  <div style="padding:14px 0;border-bottom:1px solid #1A1A18;display:flex;justify-content:space-between;"><span style="font-size:12px;color:#C8C4BC;">Subaru WRX STI</span><span style="font-size:10px;color:#3A3A38;">View →</span></div>
+                  <div style="padding:14px 0;border-bottom:1px solid #1A1A18;display:flex;justify-content:space-between;"><span style="font-size:12px;color:#C8C4BC;">BMW E92 M3</span><span style="font-size:10px;color:#3A3A38;">View →</span></div>
+                  <div style="padding:14px 0;display:flex;justify-content:space-between;"><span style="font-size:12px;color:#C8C4BC;">Nissan Skyline GT-R</span><span style="font-size:10px;color:#3A3A38;">View →</span></div>
+                </div>
+              </div>
+            </div>
+            <!-- Footer -->
+            <div style="padding:14px 36px;display:flex;align-items:center;justify-content:space-between;background:#040402;">
+              <span style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#3A3A38;">Iron Clutch</span>
+              <div style="display:flex;gap:20px;"><span style="font-size:10px;color:#2A2A28;letter-spacing:0.10em;">Instagram</span><span style="font-size:10px;color:#2A2A28;letter-spacing:0.10em;">YouTube</span><span style="font-size:10px;color:#2A2A28;letter-spacing:0.10em;">Discord</span></div>
+              <span style="font-size:10px;color:#2A2A28;">© 2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile column -->
+      <div class="mobile-col">
+        <!-- Phone 1: Homepage -->
+        <div class="phone-mockup">
+          <div class="phone-bar"><div class="phone-notch"></div><div class="phone-url">ironclutch.in</div></div>
+          <div class="phone-scroll">
+            <div style="font-family:'Barlow Condensed',Arial,sans-serif;background:#080806;color:#D8D5D0;">
+              <div style="background:#060604;border-bottom:1px solid #1A1A18;padding:0 14px;height:36px;display:flex;align-items:center;justify-content:space-between;"><span style="font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:#D8D5D0;">Iron Clutch</span><span style="font-size:14px;color:#C88C30;">☰</span></div>
+              <!-- Mobile hero photo -->
+              <div style="position:relative;height:220px;overflow:hidden;">
+                <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&q=80&fit=crop" alt="Car" style="width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.5);" />
+                <div style="position:absolute;inset:0;background:linear-gradient(to top,#080806 20%,transparent 65%);"></div>
+                <div style="position:absolute;bottom:0;left:0;padding:18px 14px;">
+                  <p style="font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:#C88C30;margin-bottom:8px;">Est. 2019</p>
+                  <h1 style="font-family:'Barlow Condensed',Arial,sans-serif;font-size:28px;font-weight:600;line-height:1.0;letter-spacing:0.02em;text-transform:uppercase;color:#F0EDE8;margin-bottom:12px;">Built for<br/>the obsessive.</h1>
+                  <div style="display:inline-flex;padding:7px 14px;background:#C88C30;font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:#080806;font-weight:700;">Shop Parts ↗</div>
+                </div>
+              </div>
+              <!-- Amber ticker -->
+              <div style="background:#C88C30;padding:6px 14px;"><p style="font-size:8px;letter-spacing:0.12em;text-transform:uppercase;color:#1A0E04;font-weight:600;">BBS · Bilstein · Rays Volk · Ships India-wide</p></div>
+              <!-- Product list -->
+              <div style="padding:16px 14px;">
+                <p style="font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:#C88C30;margin-bottom:14px;">Featured Parts</p>
+                <div style="border-top:1px solid #1A1A18;">
+                  <div style="padding:11px 0;border-bottom:1px solid #1A1A18;display:flex;gap:10px;align-items:center;">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=100&q=80&fit=crop" alt="" style="width:40px;height:40px;object-fit:cover;flex-shrink:0;" />
+                    <div style="flex:1;"><p style="font-size:11px;color:#C8C4BC;margin-bottom:2px;">BBS RS-GT</p><p style="font-size:8px;color:#3A3A38;letter-spacing:0.08em;">18" FORGED ALLOY</p></div>
+                    <p style="font-size:11px;color:#C88C30;font-weight:600;">₹48k</p>
+                  </div>
+                  <div style="padding:11px 0;border-bottom:1px solid #1A1A18;display:flex;gap:10px;align-items:center;">
+                    <img src="https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=100&q=80&fit=crop" alt="" style="width:40px;height:40px;object-fit:cover;flex-shrink:0;" />
+                    <div style="flex:1;"><p style="font-size:11px;color:#C8C4BC;margin-bottom:2px;">Bilstein B16</p><p style="font-size:8px;color:#3A3A38;letter-spacing:0.08em;">COILOVER KIT</p></div>
+                    <p style="font-size:11px;color:#C88C30;font-weight:600;">₹72k</p>
+                  </div>
+                  <div style="padding:11px 0;display:flex;gap:10px;align-items:center;">
+                    <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=100&q=80&fit=crop" alt="" style="width:40px;height:40px;object-fit:cover;flex-shrink:0;" />
+                    <div style="flex:1;"><p style="font-size:11px;color:#C8C4BC;margin-bottom:2px;">K&amp;N Cold Air</p><p style="font-size:8px;color:#3A3A38;letter-spacing:0.08em;">INTAKE KIT</p></div>
+                    <p style="font-size:11px;color:#C88C30;font-weight:600;">₹18.5k</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Phone 2: Build diaries -->
+        <div class="phone-mockup">
+          <div class="phone-bar"><div class="phone-notch"></div><div class="phone-url">ironclutch.in/builds</div></div>
+          <div class="phone-scroll">
+            <div style="font-family:'Barlow Condensed',Arial,sans-serif;background:#080806;color:#D8D5D0;">
+              <div style="background:#060604;border-bottom:1px solid #1A1A18;padding:0 14px;height:36px;display:flex;align-items:center;justify-content:space-between;"><span style="font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:#D8D5D0;">Iron Clutch</span><span style="font-size:14px;color:#C88C30;">☰</span></div>
+              <div style="position:relative;height:140px;overflow:hidden;">
+                <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&q=80&fit=crop" alt="Build" style="width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.5);" />
+                <div style="position:absolute;inset:0;background:linear-gradient(to top,#080806 15%,transparent 60%);"></div>
+                <div style="position:absolute;bottom:0;left:0;padding:14px;">
+                  <p style="font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:#C88C30;margin-bottom:4px;">Community</p>
+                  <h2 style="font-family:'Barlow Condensed',Arial,sans-serif;font-size:22px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:#F0EDE8;">Build diaries.</h2>
+                </div>
+              </div>
+              <div style="padding:16px 14px;">
+                <div style="border-top:1px solid #1A1A18;">
+                  <div style="padding:13px 0;border-bottom:1px solid #1A1A18;display:flex;justify-content:space-between;align-items:center;"><div><p style="font-size:12px;color:#C8C4BC;margin-bottom:3px;">Honda Civic EK9</p><p style="font-size:8px;color:#3A3A38;letter-spacing:0.08em;">STREET BUILD · Rahul V.</p></div><span style="font-size:10px;color:#C88C30;">→</span></div>
+                  <div style="padding:13px 0;border-bottom:1px solid #1A1A18;display:flex;justify-content:space-between;align-items:center;"><div><p style="font-size:12px;color:#C8C4BC;margin-bottom:3px;">Subaru WRX STI</p><p style="font-size:8px;color:#3A3A38;letter-spacing:0.08em;">TRACK PREP · Kiran M.</p></div><span style="font-size:10px;color:#C88C30;">→</span></div>
+                  <div style="padding:13px 0;border-bottom:1px solid #1A1A18;display:flex;justify-content:space-between;align-items:center;"><div><p style="font-size:12px;color:#C8C4BC;margin-bottom:3px;">BMW E92 M3</p><p style="font-size:8px;color:#3A3A38;letter-spacing:0.08em;">RESTOMOD · Arjun S.</p></div><span style="font-size:10px;color:#C88C30;">→</span></div>
+                  <div style="padding:13px 0;display:flex;justify-content:space-between;align-items:center;"><div><p style="font-size:12px;color:#C8C4BC;margin-bottom:3px;">Nissan GT-R R34</p><p style="font-size:8px;color:#3A3A38;letter-spacing:0.08em;">FULL BUILD · Dhruv K.</p></div><span style="font-size:10px;color:#C88C30;">→</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- NEXT PROJECT -->
+  <a href="museum.html" class="next-project">
+    <div class="next-left">
+      <p class="label">Next Project</p>
+      <h3>Paloma Museum</h3>
+      <span class="arrow">→</span>
+    </div>
+    <div class="next-right">
+      <img src="https://images.unsplash.com/photo-1577720643272-265f09367456?w=900&q=80&fit=crop" alt="Paloma Museum" />
+    </div>
+  </a>
+
+  <footer>
+    <a href="index.html">← suryar.studio</a>
+    <span>© 2025</span>
+  </footer>
+
+</body>
+</html>
